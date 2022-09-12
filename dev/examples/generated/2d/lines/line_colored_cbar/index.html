@@ -1,0 +1,4486 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Makie Examples">
+      
+      
+        <meta name="author" content="Lazaro Alonso">
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.4">
+    
+    
+      
+        <title>Colored line Colorbar - Beautiful Makie</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.6b80c2a2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Lato";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="Beautiful Makie" class="md-header__button md-logo" aria-label="Beautiful Makie" data-md-component="logo">
+      
+  <img src="../../../../../img/makie.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Beautiful Makie
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Colored line Colorbar
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="amber"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/lazarusA/BeautifulMakie" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BeautifulMakie
+  </div>
+</a>
+
+<a href="https://twitter.com/lazarusAlon" title="Go to Twitter" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    @lazarusAlon
+  </div>
+</a>
+
+
+<a href="https://github.com/sponsors/lazarusA?o=esb" title="Go to Sponsor" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m244 84 11.1 12 12-11.98C300.6 51.37 347 36.51 392.6 44.1c68.9 11.48 119.4 71.1 119.4 141v5.8c0 41.5-17.2 81.2-47.6 109.5L283.7 469.1c-7.5 7-17.4 10.9-27.7 10.9s-20.2-3.9-27.7-10.9L47.59 300.4C17.23 272.1 0 232.4 0 190.9v-5.8c0-69.9 50.52-129.52 119.4-141 44.7-7.59 92 7.27 124.6 39.9-.9 0 0 .01 0 0zm11.1 79.9-45-46.8c-21.7-20.82-52.5-30.7-82.8-25.66C81.55 99.07 48 138.7 48 185.1v5.8c0 28.2 11.71 55.2 32.34 74.4L256 429.3l175.7-164c20.6-19.2 32.3-46.2 32.3-74.4v-5.8c0-46.4-33.6-86.03-79.3-93.66-30.3-5.04-61.1 4.84-82.8 25.66l-46.8 46.8z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Sponsor
+  </div>
+</a>
+
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../line_single/" class="md-tabs__link md-tabs__link--active">
+        2D
+      </a>
+    </li>
+  
+
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../lines3d/line3d/" class="md-tabs__link">
+        3D
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../themes/black_epicycloid/" class="md-tabs__link">
+        Themes
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../animations/scatter_size/" class="md-tabs__link">
+        Animations
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../dashboards/colorshemes/" class="md-tabs__link">
+        Dashboards
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../geo/us_states/" class="md-tabs__link">
+        Geo
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../rpr/sphere_plane/" class="md-tabs__link">
+        Ray tracing
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../fun/astronauts/" class="md-tabs__link">
+        Fun
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../aog/penguins/" class="md-tabs__link">
+        Algebra of Graphics
+      </a>
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="Beautiful Makie" class="md-nav__button md-logo" aria-label="Beautiful Makie" data-md-component="logo">
+      
+  <img src="../../../../../img/makie.svg" alt="logo">
+
+    </a>
+    Beautiful Makie
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/lazarusA/BeautifulMakie" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BeautifulMakie
+  </div>
+</a>
+
+<a href="https://twitter.com/lazarusAlon" title="Go to Twitter" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    @lazarusAlon
+  </div>
+</a>
+
+
+<a href="https://github.com/sponsors/lazarusA?o=esb" title="Go to Sponsor" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="m244 84 11.1 12 12-11.98C300.6 51.37 347 36.51 392.6 44.1c68.9 11.48 119.4 71.1 119.4 141v5.8c0 41.5-17.2 81.2-47.6 109.5L283.7 469.1c-7.5 7-17.4 10.9-27.7 10.9s-20.2-3.9-27.7-10.9L47.59 300.4C17.23 272.1 0 232.4 0 190.9v-5.8c0-69.9 50.52-129.52 119.4-141 44.7-7.59 92 7.27 124.6 39.9-.9 0 0 .01 0 0zm11.1 79.9-45-46.8c-21.7-20.82-52.5-30.7-82.8-25.66C81.55 99.07 48 138.7 48 185.1v5.8c0 28.2 11.71 55.2 32.34 74.4L256 429.3l175.7-164c20.6-19.2 32.3-46.2 32.3-74.4v-5.8c0-46.4-33.6-86.03-79.3-93.66-30.3-5.04-61.1 4.84-82.8 25.66l-46.8 46.8z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Sponsor
+  </div>
+</a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          2D
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2D" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          2D
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Lines & Scatters
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Lines & Scatters" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Lines & Scatters
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1" type="checkbox" id="__nav_2_1_1" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_1">
+          Lines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Lines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Lines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_single/" class="md-nav__link">
+        Single line
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_two/" class="md-nav__link">
+        Two lines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_twin_axis/" class="md-nav__link">
+        Twin Axis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_cmap/" class="md-nav__link">
+        Lines Colorbar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_cmaps/" class="md-nav__link">
+        Lines with different Colorbars
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_cmaps_a/" class="md-nav__link">
+        Lines with Colorbars around
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_colored/" class="md-nav__link">
+        Colored lines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Colored line Colorbar
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_inset/" class="md-nav__link">
+        Inset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_inset_h/" class="md-nav__link">
+        Inset heatmap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_latex/" class="md-nav__link">
+        Latex
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_latex_bessel/" class="md-nav__link">
+        Bessel 1st
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_latex_bessels/" class="md-nav__link">
+        Bessel 2nd
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_time/" class="md-nav__link">
+        Time series
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_xlog/" class="md-nav__link">
+        x log 
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_ylog/" class="md-nav__link">
+        y log
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../line_xylog/" class="md-nav__link">
+        xy log
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_2" type="checkbox" id="__nav_2_1_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_2">
+          Scatters
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scatters" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Scatters
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatters/scatter/" class="md-nav__link">
+        Scatter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatters/scatters_colormap/" class="md-nav__link">
+        Scatters with colormaps
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatters/bubble_plot/" class="md-nav__link">
+        Bubble plot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatters/bubble_plot_logxy/" class="md-nav__link">
+        Bubble plot logxy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatters/iris_dataset/" class="md-nav__link">
+        Iris dataset
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatters/makie_contributors/" class="md-nav__link">
+        Makie Contributors
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_3" type="checkbox" id="__nav_2_1_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_3">
+          Scatterslines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Scatterslines" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Scatterslines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatterlines/simple/" class="md-nav__link">
+        Sine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatterlines/spirals/" class="md-nav__link">
+        Spirals 
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatterlines/markers/" class="md-nav__link">
+        Markers 
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatterlines/scatterls_line/" class="md-nav__link">
+        Scatterlines and lines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../scatterlines/scatterls_line_leg_out/" class="md-nav__link">
+        Scatterlines and lines: Legend out
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_4" type="checkbox" id="__nav_2_1_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_4">
+          Linesegments
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Linesegments" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          Linesegments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linesegments/linesegments/" class="md-nav__link">
+        linesegments
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linesegments/RRGraph/" class="md-nav__link">
+        RRGraph
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_5" type="checkbox" id="__nav_2_1_5" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_5">
+          Series
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Series" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Series
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../series/series/" class="md-nav__link">
+        series
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_6" type="checkbox" id="__nav_2_1_6" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_6">
+          Stairs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Stairs" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Stairs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stairs/stairs/" class="md-nav__link">
+        stairs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_7" type="checkbox" id="__nav_2_1_7" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_7">
+          Stem
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Stem" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_7">
+          <span class="md-nav__icon md-icon"></span>
+          Stem
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stem/stem/" class="md-nav__link">
+        stem
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_8" type="checkbox" id="__nav_2_1_8" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_8">
+          Contour
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contour" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_8">
+          <span class="md-nav__icon md-icon"></span>
+          Contour
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contour/egg_shape/" class="md-nav__link">
+        Egg shape
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contour/contour_over_heatmap/" class="md-nav__link">
+        Contour over heatmap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contour/qubit/" class="md-nav__link">
+        Qubit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contour/complex_function/" class="md-nav__link">
+        Complex function
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_9" type="checkbox" id="__nav_2_1_9" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_9">
+          Arrows
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Arrows" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_9">
+          <span class="md-nav__icon md-icon"></span>
+          Arrows
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../arrows/arrows/" class="md-nav__link">
+        arrows
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_10" type="checkbox" id="__nav_2_1_10" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_10">
+          Streamplot
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Streamplot" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_10">
+          <span class="md-nav__icon md-icon"></span>
+          Streamplot
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../streamplot/streamplot/" class="md-nav__link">
+        Field lines: Electric charges
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../streamplot/ode_solution/" class="md-nav__link">
+        ode solution
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../streamplot/field_heatmap/" class="md-nav__link">
+        field heatmap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../streamplot/poincare_vander/" class="md-nav__link">
+        Poincare - Van der Paul
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../streamplot/complex_polya_field/" class="md-nav__link">
+        Complex Polya Field
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Statistics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Statistics" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Statistics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_1" type="checkbox" id="__nav_2_2_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1">
+          Histogram
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Histogram" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Histogram
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../histogram/hist/" class="md-nav__link">
+        hist
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../histogram/hists_on_the_sides/" class="md-nav__link">
+        histograms on the sides
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../histogram/bins_counts/" class="md-nav__link">
+        Bins and counts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../histogram/normalizations/" class="md-nav__link">
+        Normalization options
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../histogram/hist_pdf/" class="md-nav__link">
+        hist + pdf = density
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../histogram/parallel_image_hist/" class="md-nav__link">
+        hist from image
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_2" type="checkbox" id="__nav_2_2_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2">
+          Density
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Density" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Density
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../density/density/" class="md-nav__link">
+        Distributions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../density/mtcars_density/" class="md-nav__link">
+        RDatasets: mtcars
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_3" type="checkbox" id="__nav_2_2_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_3">
+          Boxplots
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Boxplots" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Boxplots
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../boxplots/boxplots_collection/" class="md-nav__link">
+        Boxplots collection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../boxplots/vertical_horizontal/" class="md-nav__link">
+        Vertical / Horizontal
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../boxplots/airquality/" class="md-nav__link">
+        Boxes: airquality
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_4" type="checkbox" id="__nav_2_2_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_4">
+          Violins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Violins" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Violins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../violins/single/" class="md-nav__link">
+        Single
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../violins/collection_violins/" class="md-nav__link">
+        Violins collection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../violins/airquality/" class="md-nav__link">
+        Violins: airquality
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_5" type="checkbox" id="__nav_2_2_5" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_5">
+          Errorbars
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Errorbars" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Errorbars
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../errorbars/simple_x_y/" class="md-nav__link">
+        Simple x-y errorbars
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../errorbars/y_colormap/" class="md-nav__link">
+        y errorbar with colormap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../errorbars/errorbars/" class="md-nav__link">
+        Errorbars formation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2_6" type="checkbox" id="__nav_2_2_6" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_6">
+          Barplots
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Barplots" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Barplots
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bars/barplot_y_error/" class="md-nav__link">
+        Barplot & y errorbar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bars/x_barplot_error_y_error/" class="md-nav__link">
+        x - Barplot error & y errorbar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bars/barplot_cmap_y_error/" class="md-nav__link">
+        Barplot with colormap & y errorbar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bars/stripped_bars/" class="md-nav__link">
+        Stripped barplots
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          Heatmap
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Heatmap" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Heatmap
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../heatmaps/heatmap/" class="md-nav__link">
+        heatmap
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../heatmaps/text_heatmap/" class="md-nav__link">
+        heatmap with text
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_4">
+          Filled curves
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Filled curves" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Filled curves
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../band/band/" class="md-nav__link">
+        Bands: Intervals - Ribbon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../band/filled_under/" class="md-nav__link">
+        Filled under line
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../band/filled_under_bell/" class="md-nav__link">
+        Filled under bell-shaped curves
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../band/band_ribbon/" class="md-nav__link">
+        Band - Ribbon - Between
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../band/band_confidence_error/" class="md-nav__link">
+        Confidence region
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" type="checkbox" id="__nav_2_5" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_5">
+          Polygons
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Polygons" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Polygons
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../poly/poly_ngon/" class="md-nav__link">
+        Poygons: ngon
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          3D
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="3D" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          3D
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_1">
+          Lines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Lines" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Lines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lines3d/line3d/" class="md-nav__link">
+        Line 3d
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lines3d/lines_wire_contour_3d/" class="md-nav__link">
+        Lines, contour3d, contour, wireframe
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lines3d/wireframe_torus/" class="md-nav__link">
+        wireframe: torus
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_2">
+          Surfaces
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Surfaces" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Surfaces
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/surface/" class="md-nav__link">
+        surface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/branching/" class="md-nav__link">
+        branching
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/constraints/" class="md-nav__link">
+        constraints
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/gabriels_horn/" class="md-nav__link">
+        Gabriel's Horn
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/klein_bottle/" class="md-nav__link">
+        Klein Bottle
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/onecolor/" class="md-nav__link">
+        One colour
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/complex_function/" class="md-nav__link">
+        Complex function
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/revolution_surface/" class="md-nav__link">
+        Revolution surface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/revolution_surface_s/" class="md-nav__link">
+        Revolution surface s
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/tesseralSphericalH/" class="md-nav__link">
+        Tesseral Spherical Harmonics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/torus/" class="md-nav__link">
+        Torus
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../surfaces/band3d/" class="md-nav__link">
+        Band 3D plane surface
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          Meshscatters
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Meshscatters" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Meshscatters
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mscatters/cube_mscatters/" class="md-nav__link">
+        Cube: meshscatters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mscatters/RGBAcube/" class="md-nav__link">
+        RGBA cube
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mscatters/RRGraph3D/" class="md-nav__link">
+        Weighted random-geometric Graph 3D
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mscatters/SSAO_meshscatter/" class="md-nav__link">
+        Screen-Space Ambient Occlusion, SSAO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mscatters/SSAO_mgrid/" class="md-nav__link">
+        SSAO: meshscatter grid
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mscatters/gauss2d/" class="md-nav__link">
+        Gauss-like shapes 2d
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_4">
+          Volumes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Volumes" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Volumes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../volume/volume/" class="md-nav__link">
+        volume
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../volume/volume_contour_scatters/" class="md-nav__link">
+        volume contour & scatters
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_5">
+          Contour: volume-like, surface-like & 3d lines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Contour: volume-like, surface-like & 3d lines" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Contour: volume-like, surface-like & 3d lines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contour3d/contourf_contour3d/" class="md-nav__link">
+        contourf & contour3d
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contour3d/contour_v/" class="md-nav__link">
+        contour: volume-like
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_6" type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_6">
+          Meshes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Meshes" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Meshes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../meshes/meshes/" class="md-nav__link">
+        Meshes: Cylinder, Pyramid, Sphere, Rect3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../meshes/Earth_planes/" class="md-nav__link">
+        Earth and planes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Themes
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Themes" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Themes
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_1">
+          Predefined
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Predefined" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Predefined
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/black_epicycloid/" class="md-nav__link">
+        black: epicycloid
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/dark_surface_contour3d_streamplot/" class="md-nav__link">
+        dark: surface, contour3d & streamplot
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/minimal_series/" class="md-nav__link">
+        minimal: series
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/ggplot2_stem/" class="md-nav__link">
+        ggplot2: stem
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../themes/light_ngon/" class="md-nav__link">
+        light: poly
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Animations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Animations" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Animations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Basics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Basics" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Basics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../animations/scatter_size/" class="md-nav__link">
+        Scatter size
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Dashboards
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Dashboards" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Dashboards
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6_1">
+          Basics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Basics" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Basics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dashboards/colorshemes/" class="md-nav__link">
+        Slider
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dashboards/tesseral_spherical_harmonics/" class="md-nav__link">
+        Menu and Sliders
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dashboards/matcap/" class="md-nav__link">
+        Material Capture: matcap
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Geo
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Geo" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Geo
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_1" type="checkbox" id="__nav_7_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_7_1">
+          Projections
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Projections" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          Projections
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geo/us_states/" class="md-nav__link">
+        Winkel Tripel, US States
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geo/coastlines/" class="md-nav__link">
+        coastlines
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geo/projections/" class="md-nav__link">
+        projections
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geo/submarine_cables/" class="md-nav__link">
+        Submarine Cables
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geo/blue_marbel/" class="md-nav__link">
+        Blue Marbel
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geo/moon/" class="md-nav__link">
+        Moon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geo/donut_earth_sun/" class="md-nav__link">
+        Donut: Earth & Sun
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_8">
+          Ray tracing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ray tracing" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Ray tracing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1" type="checkbox" id="__nav_8_1" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_8_1">
+          Basics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Basics" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_1">
+          <span class="md-nav__icon md-icon"></span>
+          Basics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rpr/sphere_plane/" class="md-nav__link">
+        Sphere and plane
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_9">
+          Fun
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Fun" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Fun
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_1" type="checkbox" id="__nav_9_1" >
+      
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_9_1">
+          Random plots
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Random plots" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_1">
+          <span class="md-nav__icon md-icon"></span>
+          Random plots
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fun/astronauts/" class="md-nav__link">
+        Astronauts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fun/earthquakes/" class="md-nav__link">
+        Earthquakes on Earth: depth not at scale
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_10">
+          Algebra of Graphics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Algebra of Graphics" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Algebra of Graphics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_1" type="checkbox" id="__nav_10_1" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_10_1">
+          Statistics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Statistics" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_1">
+          <span class="md-nav__icon md-icon"></span>
+          Statistics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aog/penguins/" class="md-nav__link">
+        Penguins, no AoG
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>Colored line Colorbar</h1>
+
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="n">CairoMakie</span><span class="p">,</span><span class="w"> </span><span class="n">ColorSchemes</span><span class="w"></span>
+<span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mi">1</span><span class="w"></span>
+<span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="w"></span>
+<span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="n">p</span><span class="p">))</span><span class="w"></span>
+<span class="n">psize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w"></span>
+<span class="n">ys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">psize</span><span class="p">)</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">indx</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
+<span class="w">        </span><span class="n">ys</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">indx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xs</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">        </span><span class="n">ys</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">indx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xs</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="n">i</span><span class="w"></span>
+<span class="w">    </span><span class="k">end</span><span class="w"></span>
+<span class="k">end</span><span class="w"></span>
+<span class="n">cbarPal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:thermal</span><span class="w"></span>
+<span class="n">cmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cgrad</span><span class="p">(</span><span class="n">colorschemes</span><span class="p">[</span><span class="n">cbarPal</span><span class="p">],</span><span class="w"> </span><span class="n">psize</span><span class="p">,</span><span class="w"> </span><span class="n">categorical</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
+<span class="n">fig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Figure</span><span class="p">(</span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">),</span><span class="w"> </span><span class="n">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CMU Serif&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">ax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Axis</span><span class="p">(</span><span class="n">fig</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">xlabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;x^{p}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">xlabelsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="n">ylabelsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">22</span><span class="p">)</span><span class="w"></span>
+<span class="p">[</span><span class="n">lines!</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span><span class="w"> </span><span class="n">ys</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">],</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmap</span><span class="p">[</span><span class="n">v</span><span class="p">])</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">psize</span><span class="p">]</span><span class="w"></span>
+<span class="n">Colorbar</span><span class="p">(</span><span class="n">fig</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">nsteps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">psize</span><span class="p">,</span><span class="w"> </span><span class="n">colormap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cmap</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">L</span><span class="s">&quot;p&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ticksize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">tickalign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="n">colsize!</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">Aspect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span><span class="w"></span>
+<span class="n">fig</span><span class="w"></span>
+</code></pre></div>
+<?xml version="1.0" encoding="UTF-8"?>
+<p><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="450pt" height="300pt" viewBox="0 0 450 300" version="1.1">
+<defs>
+<g>
+<symbol overflow="visible" id="glyph0-0-B7n/WbgL">
+<path style="stroke:none;" d="M 2.0625 0 L 2.0625 -10.3125 L 10.3125 -10.3125 L 10.3125 0 Z M 10.046875 -0.265625 L 10.046875 -10.046875 L 2.328125 -10.046875 L 2.328125 -0.265625 Z M 10.046875 -0.265625 "/>
+</symbol>
+<symbol overflow="visible" id="glyph0-1-B7n/WbgL">
+<path style="stroke:none;" d="M 1.296875 -0.46875 C 1.484375 -0.320312 1.753906 -0.25 2.109375 -0.25 C 2.453125 -0.25 2.753906 -0.410156 3.015625 -0.734375 C 3.285156 -1.066406 3.46875 -1.429688 3.5625 -1.828125 L 4.3125 -4.75 C 4.425781 -5.28125 4.484375 -5.644531 4.484375 -5.84375 C 4.484375 -6.113281 4.40625 -6.347656 4.25 -6.546875 C 4.101562 -6.753906 3.894531 -6.859375 3.625 -6.859375 C 3.269531 -6.859375 2.9375 -6.75 2.625 -6.53125 C 2.320312 -6.320312 2.066406 -6.046875 1.859375 -5.703125 C 1.648438 -5.367188 1.503906 -5.03125 1.421875 -4.6875 C 1.398438 -4.613281 1.359375 -4.578125 1.296875 -4.578125 L 1.09375 -4.578125 C 1 -4.578125 0.953125 -4.628906 0.953125 -4.734375 L 0.953125 -4.78125 C 1.066406 -5.1875 1.25 -5.582031 1.5 -5.96875 C 1.757812 -6.363281 2.078125 -6.679688 2.453125 -6.921875 C 2.828125 -7.171875 3.226562 -7.296875 3.65625 -7.296875 C 4.050781 -7.296875 4.410156 -7.1875 4.734375 -6.96875 C 5.066406 -6.75 5.300781 -6.457031 5.4375 -6.09375 C 5.625 -6.425781 5.863281 -6.707031 6.15625 -6.9375 C 6.445312 -7.175781 6.765625 -7.296875 7.109375 -7.296875 C 7.347656 -7.296875 7.585938 -7.253906 7.828125 -7.171875 C 8.078125 -7.085938 8.28125 -6.957031 8.4375 -6.78125 C 8.59375 -6.613281 8.671875 -6.398438 8.671875 -6.140625 C 8.671875 -5.859375 8.582031 -5.613281 8.40625 -5.40625 C 8.226562 -5.207031 8 -5.109375 7.71875 -5.109375 C 7.539062 -5.109375 7.390625 -5.164062 7.265625 -5.28125 C 7.148438 -5.394531 7.09375 -5.539062 7.09375 -5.71875 C 7.09375 -5.945312 7.171875 -6.144531 7.328125 -6.3125 C 7.492188 -6.488281 7.6875 -6.59375 7.90625 -6.625 C 7.707031 -6.78125 7.429688 -6.859375 7.078125 -6.859375 C 6.722656 -6.859375 6.414062 -6.691406 6.15625 -6.359375 C 5.894531 -6.035156 5.710938 -5.675781 5.609375 -5.28125 L 4.875 -2.359375 C 4.757812 -1.921875 4.703125 -1.554688 4.703125 -1.265625 C 4.703125 -0.992188 4.78125 -0.753906 4.9375 -0.546875 C 5.101562 -0.347656 5.316406 -0.25 5.578125 -0.25 C 6.085938 -0.25 6.546875 -0.472656 6.953125 -0.921875 C 7.359375 -1.378906 7.628906 -1.878906 7.765625 -2.421875 C 7.785156 -2.484375 7.828125 -2.515625 7.890625 -2.515625 L 8.09375 -2.515625 C 8.132812 -2.515625 8.164062 -2.5 8.1875 -2.46875 C 8.21875 -2.445312 8.234375 -2.414062 8.234375 -2.375 C 8.234375 -2.363281 8.226562 -2.347656 8.21875 -2.328125 C 8.0625 -1.671875 7.734375 -1.085938 7.234375 -0.578125 C 6.734375 -0.0664062 6.171875 0.1875 5.546875 0.1875 C 5.140625 0.1875 4.773438 0.078125 4.453125 -0.140625 C 4.128906 -0.359375 3.898438 -0.648438 3.765625 -1.015625 C 3.585938 -0.703125 3.347656 -0.421875 3.046875 -0.171875 C 2.742188 0.0664062 2.421875 0.1875 2.078125 0.1875 C 1.835938 0.1875 1.59375 0.144531 1.34375 0.0625 C 1.09375 -0.0195312 0.890625 -0.144531 0.734375 -0.3125 C 0.578125 -0.488281 0.5 -0.707031 0.5 -0.96875 C 0.5 -1.226562 0.585938 -1.460938 0.765625 -1.671875 C 0.953125 -1.890625 1.179688 -2 1.453125 -2 C 1.628906 -2 1.78125 -1.941406 1.90625 -1.828125 C 2.03125 -1.722656 2.09375 -1.582031 2.09375 -1.40625 C 2.09375 -1.175781 2.015625 -0.972656 1.859375 -0.796875 C 1.710938 -0.628906 1.523438 -0.519531 1.296875 -0.46875 Z M 1.296875 -0.46875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph1-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph1-1-B7n/WbgL">
+<path style="stroke:none;" d="M 3.8125 -0.40625 C 4.414062 -0.40625 4.863281 -0.734375 5.15625 -1.390625 C 5.457031 -2.046875 5.609375 -3.035156 5.609375 -4.359375 C 5.609375 -5.691406 5.457031 -6.6875 5.15625 -7.34375 C 4.863281 -8 4.414062 -8.328125 3.8125 -8.328125 C 3.21875 -8.328125 2.769531 -8 2.46875 -7.34375 C 2.175781 -6.6875 2.03125 -5.691406 2.03125 -4.359375 C 2.03125 -3.035156 2.175781 -2.046875 2.46875 -1.390625 C 2.769531 -0.734375 3.21875 -0.40625 3.8125 -0.40625 Z M 3.8125 0.171875 C 2.863281 0.171875 2.125 -0.222656 1.59375 -1.015625 C 1.0625 -1.816406 0.796875 -2.929688 0.796875 -4.359375 C 0.796875 -5.796875 1.0625 -6.910156 1.59375 -7.703125 C 2.125 -8.503906 2.863281 -8.90625 3.8125 -8.90625 C 4.769531 -8.90625 5.515625 -8.503906 6.046875 -7.703125 C 6.578125 -6.910156 6.84375 -5.796875 6.84375 -4.359375 C 6.84375 -2.929688 6.578125 -1.816406 6.046875 -1.015625 C 5.515625 -0.222656 4.769531 0.171875 3.8125 0.171875 Z M 3.8125 0.171875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph2-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph2-1-B7n/WbgL">
+<path style="stroke:none;" d="M 1.125 -0.609375 C 1.125 -0.828125 1.195312 -1.007812 1.34375 -1.15625 C 1.5 -1.3125 1.6875 -1.390625 1.90625 -1.390625 C 2.125 -1.390625 2.304688 -1.3125 2.453125 -1.15625 C 2.609375 -1.007812 2.6875 -0.828125 2.6875 -0.609375 C 2.6875 -0.390625 2.609375 -0.203125 2.453125 -0.046875 C 2.304688 0.0976562 2.125 0.171875 1.90625 0.171875 C 1.6875 0.171875 1.5 0.0976562 1.34375 -0.046875 C 1.195312 -0.203125 1.125 -0.390625 1.125 -0.609375 Z M 1.125 -0.609375 "/>
+</symbol>
+<symbol overflow="visible" id="glyph2-2-B7n/WbgL">
+<path style="stroke:none;" d="M 3.8125 -0.40625 C 4.414062 -0.40625 4.863281 -0.734375 5.15625 -1.390625 C 5.457031 -2.046875 5.609375 -3.035156 5.609375 -4.359375 C 5.609375 -5.691406 5.457031 -6.6875 5.15625 -7.34375 C 4.863281 -8 4.414062 -8.328125 3.8125 -8.328125 C 3.21875 -8.328125 2.769531 -8 2.46875 -7.34375 C 2.175781 -6.6875 2.03125 -5.691406 2.03125 -4.359375 C 2.03125 -3.035156 2.175781 -2.046875 2.46875 -1.390625 C 2.769531 -0.734375 3.21875 -0.40625 3.8125 -0.40625 Z M 3.8125 0.171875 C 2.863281 0.171875 2.125 -0.222656 1.59375 -1.015625 C 1.0625 -1.816406 0.796875 -2.929688 0.796875 -4.359375 C 0.796875 -5.796875 1.0625 -6.910156 1.59375 -7.703125 C 2.125 -8.503906 2.863281 -8.90625 3.8125 -8.90625 C 4.769531 -8.90625 5.515625 -8.503906 6.046875 -7.703125 C 6.578125 -6.910156 6.84375 -5.796875 6.84375 -4.359375 C 6.84375 -2.929688 6.578125 -1.816406 6.046875 -1.015625 C 5.515625 -0.222656 4.769531 0.171875 3.8125 0.171875 Z M 3.8125 0.171875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph3-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph3-1-B7n/WbgL">
+<path style="stroke:none;" d="M 3.8125 -0.40625 C 4.414062 -0.40625 4.863281 -0.734375 5.15625 -1.390625 C 5.457031 -2.046875 5.609375 -3.035156 5.609375 -4.359375 C 5.609375 -5.691406 5.457031 -6.6875 5.15625 -7.34375 C 4.863281 -8 4.414062 -8.328125 3.8125 -8.328125 C 3.21875 -8.328125 2.769531 -8 2.46875 -7.34375 C 2.175781 -6.6875 2.03125 -5.691406 2.03125 -4.359375 C 2.03125 -3.035156 2.175781 -2.046875 2.46875 -1.390625 C 2.769531 -0.734375 3.21875 -0.40625 3.8125 -0.40625 Z M 3.8125 0.171875 C 2.863281 0.171875 2.125 -0.222656 1.59375 -1.015625 C 1.0625 -1.816406 0.796875 -2.929688 0.796875 -4.359375 C 0.796875 -5.796875 1.0625 -6.910156 1.59375 -7.703125 C 2.125 -8.503906 2.863281 -8.90625 3.8125 -8.90625 C 4.769531 -8.90625 5.515625 -8.503906 6.046875 -7.703125 C 6.578125 -6.910156 6.84375 -5.796875 6.84375 -4.359375 C 6.84375 -2.929688 6.578125 -1.816406 6.046875 -1.015625 C 5.515625 -0.222656 4.769531 0.171875 3.8125 0.171875 Z M 3.8125 0.171875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph3-2-B7n/WbgL">
+<path style="stroke:none;" d="M 1.125 -0.609375 C 1.125 -0.828125 1.195312 -1.007812 1.34375 -1.15625 C 1.5 -1.3125 1.6875 -1.390625 1.90625 -1.390625 C 2.125 -1.390625 2.304688 -1.3125 2.453125 -1.15625 C 2.609375 -1.007812 2.6875 -0.828125 2.6875 -0.609375 C 2.6875 -0.390625 2.609375 -0.203125 2.453125 -0.046875 C 2.304688 0.0976562 2.125 0.171875 1.90625 0.171875 C 1.6875 0.171875 1.5 0.0976562 1.34375 -0.046875 C 1.195312 -0.203125 1.125 -0.390625 1.125 -0.609375 Z M 1.125 -0.609375 "/>
+</symbol>
+<symbol overflow="visible" id="glyph3-3-B7n/WbgL">
+<path style="stroke:none;" d="M 6.03125 -8.75 L 6.03125 -7.78125 L 2.03125 -7.78125 L 2.03125 -5.28125 C 2.226562 -5.414062 2.460938 -5.519531 2.734375 -5.59375 C 3.003906 -5.664062 3.3125 -5.703125 3.65625 -5.703125 C 4.59375 -5.703125 5.332031 -5.4375 5.875 -4.90625 C 6.425781 -4.382812 6.703125 -3.671875 6.703125 -2.765625 C 6.703125 -1.847656 6.425781 -1.128906 5.875 -0.609375 C 5.320312 -0.0859375 4.546875 0.171875 3.546875 0.171875 C 3.148438 0.171875 2.738281 0.117188 2.3125 0.015625 C 1.894531 -0.078125 1.460938 -0.222656 1.015625 -0.421875 L 1.015625 -2.125 L 1.6875 -2.125 C 1.71875 -1.570312 1.890625 -1.144531 2.203125 -0.84375 C 2.523438 -0.550781 2.972656 -0.40625 3.546875 -0.40625 C 4.171875 -0.40625 4.644531 -0.609375 4.96875 -1.015625 C 5.300781 -1.421875 5.46875 -2.003906 5.46875 -2.765625 C 5.46875 -3.523438 5.300781 -4.109375 4.96875 -4.515625 C 4.644531 -4.921875 4.171875 -5.125 3.546875 -5.125 C 3.203125 -5.125 2.894531 -5.0625 2.625 -4.9375 C 2.351562 -4.8125 2.113281 -4.617188 1.90625 -4.359375 L 1.40625 -4.359375 L 1.40625 -8.75 Z M 6.03125 -8.75 "/>
+</symbol>
+<symbol overflow="visible" id="glyph3-4-B7n/WbgL">
+<path style="stroke:none;" d="M 1.703125 0 L 1.703125 -0.625 L 3.234375 -0.625 L 3.234375 -7.90625 L 1.46875 -6.75 L 1.46875 -7.53125 L 3.59375 -8.90625 L 4.40625 -8.90625 L 4.40625 -0.625 L 5.9375 -0.625 L 5.9375 0 Z M 1.703125 0 "/>
+</symbol>
+<symbol overflow="visible" id="glyph4-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph4-1-B7n/WbgL">
+<path style="stroke:none;" d="M 1.703125 0 L 1.703125 -0.625 L 3.234375 -0.625 L 3.234375 -7.90625 L 1.46875 -6.75 L 1.46875 -7.53125 L 3.59375 -8.90625 L 4.40625 -8.90625 L 4.40625 -0.625 L 5.9375 -0.625 L 5.9375 0 Z M 1.703125 0 "/>
+</symbol>
+<symbol overflow="visible" id="glyph4-2-B7n/WbgL">
+<path style="stroke:none;" d="M 0.53125 -3.671875 L 3.53125 -3.671875 L 3.53125 -2.765625 L 0.53125 -2.765625 Z M 0.53125 -3.671875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph4-3-B7n/WbgL">
+<path style="stroke:none;" d="M 3.8125 -0.40625 C 4.414062 -0.40625 4.863281 -0.734375 5.15625 -1.390625 C 5.457031 -2.046875 5.609375 -3.035156 5.609375 -4.359375 C 5.609375 -5.691406 5.457031 -6.6875 5.15625 -7.34375 C 4.863281 -8 4.414062 -8.328125 3.8125 -8.328125 C 3.21875 -8.328125 2.769531 -8 2.46875 -7.34375 C 2.175781 -6.6875 2.03125 -5.691406 2.03125 -4.359375 C 2.03125 -3.035156 2.175781 -2.046875 2.46875 -1.390625 C 2.769531 -0.734375 3.21875 -0.40625 3.8125 -0.40625 Z M 3.8125 0.171875 C 2.863281 0.171875 2.125 -0.222656 1.59375 -1.015625 C 1.0625 -1.816406 0.796875 -2.929688 0.796875 -4.359375 C 0.796875 -5.796875 1.0625 -6.910156 1.59375 -7.703125 C 2.125 -8.503906 2.863281 -8.90625 3.8125 -8.90625 C 4.769531 -8.90625 5.515625 -8.503906 6.046875 -7.703125 C 6.578125 -6.910156 6.84375 -5.796875 6.84375 -4.359375 C 6.84375 -2.929688 6.578125 -1.816406 6.046875 -1.015625 C 5.515625 -0.222656 4.769531 0.171875 3.8125 0.171875 Z M 3.8125 0.171875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph5-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph5-1-B7n/WbgL">
+<path style="stroke:none;" d="M 1.125 -0.609375 C 1.125 -0.828125 1.195312 -1.007812 1.34375 -1.15625 C 1.5 -1.3125 1.6875 -1.390625 1.90625 -1.390625 C 2.125 -1.390625 2.304688 -1.3125 2.453125 -1.15625 C 2.609375 -1.007812 2.6875 -0.828125 2.6875 -0.609375 C 2.6875 -0.390625 2.609375 -0.203125 2.453125 -0.046875 C 2.304688 0.0976562 2.125 0.171875 1.90625 0.171875 C 1.6875 0.171875 1.5 0.0976562 1.34375 -0.046875 C 1.195312 -0.203125 1.125 -0.390625 1.125 -0.609375 Z M 1.125 -0.609375 "/>
+</symbol>
+<symbol overflow="visible" id="glyph5-2-B7n/WbgL">
+<path style="stroke:none;" d="M 3.8125 -0.40625 C 4.414062 -0.40625 4.863281 -0.734375 5.15625 -1.390625 C 5.457031 -2.046875 5.609375 -3.035156 5.609375 -4.359375 C 5.609375 -5.691406 5.457031 -6.6875 5.15625 -7.34375 C 4.863281 -8 4.414062 -8.328125 3.8125 -8.328125 C 3.21875 -8.328125 2.769531 -8 2.46875 -7.34375 C 2.175781 -6.6875 2.03125 -5.691406 2.03125 -4.359375 C 2.03125 -3.035156 2.175781 -2.046875 2.46875 -1.390625 C 2.769531 -0.734375 3.21875 -0.40625 3.8125 -0.40625 Z M 3.8125 0.171875 C 2.863281 0.171875 2.125 -0.222656 1.59375 -1.015625 C 1.0625 -1.816406 0.796875 -2.929688 0.796875 -4.359375 C 0.796875 -5.796875 1.0625 -6.910156 1.59375 -7.703125 C 2.125 -8.503906 2.863281 -8.90625 3.8125 -8.90625 C 4.769531 -8.90625 5.515625 -8.503906 6.046875 -7.703125 C 6.578125 -6.910156 6.84375 -5.796875 6.84375 -4.359375 C 6.84375 -2.929688 6.578125 -1.816406 6.046875 -1.015625 C 5.515625 -0.222656 4.769531 0.171875 3.8125 0.171875 Z M 3.8125 0.171875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph6-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0 -2.0625 L -10.3125 -2.0625 L -10.3125 -10.3125 L 0 -10.3125 Z M -0.265625 -10.046875 L -10.046875 -10.046875 L -10.046875 -2.328125 L -0.265625 -2.328125 Z M -0.265625 -10.046875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph6-1-B7n/WbgL">
+<path style="stroke:none;" d="M -0.46875 -1.296875 C -0.320312 -1.484375 -0.25 -1.753906 -0.25 -2.109375 C -0.25 -2.453125 -0.410156 -2.753906 -0.734375 -3.015625 C -1.066406 -3.285156 -1.429688 -3.46875 -1.828125 -3.5625 L -4.75 -4.3125 C -5.28125 -4.425781 -5.644531 -4.484375 -5.84375 -4.484375 C -6.113281 -4.484375 -6.347656 -4.40625 -6.546875 -4.25 C -6.753906 -4.101562 -6.859375 -3.894531 -6.859375 -3.625 C -6.859375 -3.269531 -6.75 -2.9375 -6.53125 -2.625 C -6.320312 -2.320312 -6.046875 -2.066406 -5.703125 -1.859375 C -5.367188 -1.648438 -5.03125 -1.503906 -4.6875 -1.421875 C -4.613281 -1.398438 -4.578125 -1.359375 -4.578125 -1.296875 L -4.578125 -1.09375 C -4.578125 -1 -4.628906 -0.953125 -4.734375 -0.953125 L -4.78125 -0.953125 C -5.1875 -1.066406 -5.582031 -1.25 -5.96875 -1.5 C -6.363281 -1.757812 -6.679688 -2.078125 -6.921875 -2.453125 C -7.171875 -2.828125 -7.296875 -3.226562 -7.296875 -3.65625 C -7.296875 -4.050781 -7.1875 -4.410156 -6.96875 -4.734375 C -6.75 -5.066406 -6.457031 -5.300781 -6.09375 -5.4375 C -6.425781 -5.625 -6.707031 -5.863281 -6.9375 -6.15625 C -7.175781 -6.445312 -7.296875 -6.765625 -7.296875 -7.109375 C -7.296875 -7.347656 -7.253906 -7.585938 -7.171875 -7.828125 C -7.085938 -8.078125 -6.957031 -8.28125 -6.78125 -8.4375 C -6.613281 -8.59375 -6.398438 -8.671875 -6.140625 -8.671875 C -5.859375 -8.671875 -5.613281 -8.582031 -5.40625 -8.40625 C -5.207031 -8.226562 -5.109375 -8 -5.109375 -7.71875 C -5.109375 -7.539062 -5.164062 -7.390625 -5.28125 -7.265625 C -5.394531 -7.148438 -5.539062 -7.09375 -5.71875 -7.09375 C -5.945312 -7.09375 -6.144531 -7.171875 -6.3125 -7.328125 C -6.488281 -7.492188 -6.59375 -7.6875 -6.625 -7.90625 C -6.78125 -7.707031 -6.859375 -7.429688 -6.859375 -7.078125 C -6.859375 -6.722656 -6.691406 -6.414062 -6.359375 -6.15625 C -6.035156 -5.894531 -5.675781 -5.710938 -5.28125 -5.609375 L -2.359375 -4.875 C -1.921875 -4.757812 -1.554688 -4.703125 -1.265625 -4.703125 C -0.992188 -4.703125 -0.753906 -4.78125 -0.546875 -4.9375 C -0.347656 -5.101562 -0.25 -5.316406 -0.25 -5.578125 C -0.25 -6.085938 -0.472656 -6.546875 -0.921875 -6.953125 C -1.378906 -7.359375 -1.878906 -7.628906 -2.421875 -7.765625 C -2.484375 -7.785156 -2.515625 -7.828125 -2.515625 -7.890625 L -2.515625 -8.09375 C -2.515625 -8.132812 -2.5 -8.164062 -2.46875 -8.1875 C -2.445312 -8.21875 -2.414062 -8.234375 -2.375 -8.234375 C -2.363281 -8.234375 -2.347656 -8.226562 -2.328125 -8.21875 C -1.671875 -8.0625 -1.085938 -7.734375 -0.578125 -7.234375 C -0.0664062 -6.734375 0.1875 -6.171875 0.1875 -5.546875 C 0.1875 -5.140625 0.078125 -4.773438 -0.140625 -4.453125 C -0.359375 -4.128906 -0.648438 -3.898438 -1.015625 -3.765625 C -0.703125 -3.585938 -0.421875 -3.347656 -0.171875 -3.046875 C 0.0664062 -2.742188 0.1875 -2.421875 0.1875 -2.078125 C 0.1875 -1.835938 0.144531 -1.59375 0.0625 -1.34375 C -0.0195312 -1.09375 -0.144531 -0.890625 -0.3125 -0.734375 C -0.488281 -0.578125 -0.707031 -0.5 -0.96875 -0.5 C -1.226562 -0.5 -1.460938 -0.585938 -1.671875 -0.765625 C -1.890625 -0.953125 -2 -1.179688 -2 -1.453125 C -2 -1.628906 -1.941406 -1.78125 -1.828125 -1.90625 C -1.722656 -2.03125 -1.582031 -2.09375 -1.40625 -2.09375 C -1.175781 -2.09375 -0.972656 -2.015625 -0.796875 -1.859375 C -0.628906 -1.710938 -0.519531 -1.523438 -0.46875 -1.296875 Z M -0.46875 -1.296875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph7-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0 -1.234375 L -6.1875 -1.234375 L -6.1875 -6.1875 L 0 -6.1875 Z M -0.15625 -6.03125 L -6.03125 -6.03125 L -6.03125 -1.390625 L -0.15625 -1.390625 Z M -0.15625 -6.03125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph7-1-B7n/WbgL">
+<path style="stroke:none;" d="M 1.921875 0.25 C 1.921875 0.3125 1.878906 0.34375 1.796875 0.34375 C 1.648438 0.320312 1.578125 0.273438 1.578125 0.203125 C 1.578125 -0.00390625 1.554688 -0.144531 1.515625 -0.21875 C 1.484375 -0.300781 1.390625 -0.367188 1.234375 -0.421875 L -3.21875 -1.53125 C -3.34375 -1.582031 -3.503906 -1.609375 -3.703125 -1.609375 C -3.984375 -1.609375 -4.125 -1.507812 -4.125 -1.3125 C -4.125 -1.101562 -4 -0.945312 -3.75 -0.84375 C -3.5 -0.75 -3.1875 -0.65625 -2.8125 -0.5625 C -2.769531 -0.5625 -2.75 -0.535156 -2.75 -0.484375 L -2.75 -0.375 C -2.75 -0.351562 -2.757812 -0.332031 -2.78125 -0.3125 C -2.8125 -0.289062 -2.835938 -0.28125 -2.859375 -0.28125 C -3.140625 -0.351562 -3.378906 -0.421875 -3.578125 -0.484375 C -3.785156 -0.554688 -3.96875 -0.660156 -4.125 -0.796875 C -4.289062 -0.941406 -4.375 -1.117188 -4.375 -1.328125 C -4.375 -1.546875 -4.3125 -1.738281 -4.1875 -1.90625 C -4.0625 -2.082031 -3.890625 -2.195312 -3.671875 -2.25 C -3.878906 -2.425781 -4.046875 -2.625 -4.171875 -2.84375 C -4.304688 -3.0625 -4.375 -3.289062 -4.375 -3.53125 C -4.375 -3.800781 -4.300781 -4.039062 -4.15625 -4.25 C -4.007812 -4.457031 -3.816406 -4.609375 -3.578125 -4.703125 C -3.335938 -4.804688 -3.078125 -4.859375 -2.796875 -4.859375 C -2.367188 -4.859375 -1.925781 -4.75 -1.46875 -4.53125 C -1.019531 -4.320312 -0.644531 -4.03125 -0.34375 -3.65625 C -0.0390625 -3.28125 0.109375 -2.878906 0.109375 -2.453125 C 0.109375 -2.265625 0.0546875 -2.09375 -0.046875 -1.9375 C -0.160156 -1.78125 -0.304688 -1.65625 -0.484375 -1.5625 L 1.28125 -1.125 C 1.375 -1.101562 1.429688 -1.09375 1.453125 -1.09375 C 1.535156 -1.09375 1.578125 -1.304688 1.578125 -1.734375 C 1.578125 -1.804688 1.617188 -1.84375 1.703125 -1.84375 C 1.785156 -1.820312 1.84375 -1.800781 1.875 -1.78125 C 1.90625 -1.769531 1.921875 -1.734375 1.921875 -1.671875 Z M -0.15625 -2.46875 C -0.15625 -2.695312 -0.25 -2.910156 -0.4375 -3.109375 C -0.625 -3.304688 -0.832031 -3.460938 -1.0625 -3.578125 C -1.238281 -3.671875 -1.457031 -3.753906 -1.71875 -3.828125 C -1.976562 -3.910156 -2.25 -3.976562 -2.53125 -4.03125 C -2.820312 -4.09375 -3.054688 -4.125 -3.234375 -4.125 C -3.378906 -4.125 -3.519531 -4.101562 -3.65625 -4.0625 C -3.789062 -4.03125 -3.898438 -3.96875 -3.984375 -3.875 C -4.078125 -3.78125 -4.125 -3.65625 -4.125 -3.5 C -4.125 -3.257812 -4.035156 -3.03125 -3.859375 -2.8125 C -3.691406 -2.601562 -3.476562 -2.410156 -3.21875 -2.234375 L -3.1875 -2.234375 L -1 -1.6875 C -0.757812 -1.738281 -0.554688 -1.828125 -0.390625 -1.953125 C -0.234375 -2.078125 -0.15625 -2.25 -0.15625 -2.46875 Z M -0.15625 -2.46875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph8-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph8-1-B7n/WbgL">
+<path style="stroke:none;" d="M 1.125 -0.609375 C 1.125 -0.828125 1.195312 -1.007812 1.34375 -1.15625 C 1.5 -1.3125 1.6875 -1.390625 1.90625 -1.390625 C 2.125 -1.390625 2.304688 -1.3125 2.453125 -1.15625 C 2.609375 -1.007812 2.6875 -0.828125 2.6875 -0.609375 C 2.6875 -0.390625 2.609375 -0.203125 2.453125 -0.046875 C 2.304688 0.0976562 2.125 0.171875 1.90625 0.171875 C 1.6875 0.171875 1.5 0.0976562 1.34375 -0.046875 C 1.195312 -0.203125 1.125 -0.390625 1.125 -0.609375 Z M 1.125 -0.609375 "/>
+</symbol>
+<symbol overflow="visible" id="glyph9-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph9-1-B7n/WbgL">
+<path style="stroke:none;" d="M 1.703125 0 L 1.703125 -0.625 L 3.234375 -0.625 L 3.234375 -7.90625 L 1.46875 -6.75 L 1.46875 -7.53125 L 3.59375 -8.90625 L 4.40625 -8.90625 L 4.40625 -0.625 L 5.9375 -0.625 L 5.9375 0 Z M 1.703125 0 "/>
+</symbol>
+<symbol overflow="visible" id="glyph9-2-B7n/WbgL">
+<path style="stroke:none;" d="M 3.8125 -0.40625 C 4.414062 -0.40625 4.863281 -0.734375 5.15625 -1.390625 C 5.457031 -2.046875 5.609375 -3.035156 5.609375 -4.359375 C 5.609375 -5.691406 5.457031 -6.6875 5.15625 -7.34375 C 4.863281 -8 4.414062 -8.328125 3.8125 -8.328125 C 3.21875 -8.328125 2.769531 -8 2.46875 -7.34375 C 2.175781 -6.6875 2.03125 -5.691406 2.03125 -4.359375 C 2.03125 -3.035156 2.175781 -2.046875 2.46875 -1.390625 C 2.769531 -0.734375 3.21875 -0.40625 3.8125 -0.40625 Z M 3.8125 0.171875 C 2.863281 0.171875 2.125 -0.222656 1.59375 -1.015625 C 1.0625 -1.816406 0.796875 -2.929688 0.796875 -4.359375 C 0.796875 -5.796875 1.0625 -6.910156 1.59375 -7.703125 C 2.125 -8.503906 2.863281 -8.90625 3.8125 -8.90625 C 4.769531 -8.90625 5.515625 -8.503906 6.046875 -7.703125 C 6.578125 -6.910156 6.84375 -5.796875 6.84375 -4.359375 C 6.84375 -2.929688 6.578125 -1.816406 6.046875 -1.015625 C 5.515625 -0.222656 4.769531 0.171875 3.8125 0.171875 Z M 3.8125 0.171875 "/>
+</symbol>
+<symbol overflow="visible" id="glyph10-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph10-1-B7n/WbgL">
+<path style="stroke:none;" d="M 1.125 -0.609375 C 1.125 -0.828125 1.195312 -1.007812 1.34375 -1.15625 C 1.5 -1.3125 1.6875 -1.390625 1.90625 -1.390625 C 2.125 -1.390625 2.304688 -1.3125 2.453125 -1.15625 C 2.609375 -1.007812 2.6875 -0.828125 2.6875 -0.609375 C 2.6875 -0.390625 2.609375 -0.203125 2.453125 -0.046875 C 2.304688 0.0976562 2.125 0.171875 1.90625 0.171875 C 1.6875 0.171875 1.5 0.0976562 1.34375 -0.046875 C 1.195312 -0.203125 1.125 -0.390625 1.125 -0.609375 Z M 1.125 -0.609375 "/>
+</symbol>
+<symbol overflow="visible" id="glyph11-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0 -1.5 L -7.5 -1.5 L -7.5 -7.5 L 0 -7.5 Z M -0.1875 -7.3125 L -7.3125 -7.3125 L -7.3125 -1.6875 L -0.1875 -1.6875 Z M -0.1875 -7.3125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph11-1-B7n/WbgL">
+<path style="stroke:none;" d="M 2.328125 0.296875 C 2.328125 0.367188 2.273438 0.40625 2.171875 0.40625 C 1.992188 0.382812 1.90625 0.332031 1.90625 0.25 C 1.90625 0 1.882812 -0.171875 1.84375 -0.265625 C 1.800781 -0.367188 1.6875 -0.445312 1.5 -0.5 L -3.90625 -1.859375 C -4.050781 -1.921875 -4.242188 -1.953125 -4.484375 -1.953125 C -4.828125 -1.953125 -5 -1.832031 -5 -1.59375 C -5 -1.34375 -4.847656 -1.15625 -4.546875 -1.03125 C -4.242188 -0.914062 -3.863281 -0.800781 -3.40625 -0.6875 C -3.351562 -0.6875 -3.328125 -0.65625 -3.328125 -0.59375 L -3.328125 -0.453125 C -3.328125 -0.429688 -3.34375 -0.40625 -3.375 -0.375 C -3.40625 -0.351562 -3.429688 -0.34375 -3.453125 -0.34375 C -3.804688 -0.425781 -4.101562 -0.507812 -4.34375 -0.59375 C -4.582031 -0.675781 -4.800781 -0.800781 -5 -0.96875 C -5.195312 -1.132812 -5.296875 -1.347656 -5.296875 -1.609375 C -5.296875 -1.878906 -5.21875 -2.117188 -5.0625 -2.328125 C -4.914062 -2.535156 -4.707031 -2.664062 -4.4375 -2.71875 C -4.695312 -2.9375 -4.90625 -3.175781 -5.0625 -3.4375 C -5.21875 -3.707031 -5.296875 -3.984375 -5.296875 -4.265625 C -5.296875 -4.609375 -5.207031 -4.898438 -5.03125 -5.140625 C -4.851562 -5.390625 -4.617188 -5.578125 -4.328125 -5.703125 C -4.035156 -5.828125 -3.722656 -5.890625 -3.390625 -5.890625 C -2.867188 -5.890625 -2.332031 -5.757812 -1.78125 -5.5 C -1.238281 -5.238281 -0.78125 -4.878906 -0.40625 -4.421875 C -0.0390625 -3.972656 0.140625 -3.492188 0.140625 -2.984375 C 0.140625 -2.742188 0.0703125 -2.53125 -0.0625 -2.34375 C -0.195312 -2.15625 -0.375 -2.007812 -0.59375 -1.90625 L 1.546875 -1.359375 C 1.660156 -1.335938 1.726562 -1.320312 1.75 -1.3125 C 1.851562 -1.3125 1.90625 -1.578125 1.90625 -2.109375 C 1.90625 -2.191406 1.957031 -2.234375 2.0625 -2.234375 C 2.164062 -2.203125 2.234375 -2.175781 2.265625 -2.15625 C 2.304688 -2.144531 2.328125 -2.101562 2.328125 -2.03125 Z M -0.1875 -2.984375 C -0.1875 -3.265625 -0.300781 -3.523438 -0.53125 -3.765625 C -0.757812 -4.003906 -1.015625 -4.195312 -1.296875 -4.34375 C -1.515625 -4.445312 -1.773438 -4.546875 -2.078125 -4.640625 C -2.390625 -4.742188 -2.722656 -4.828125 -3.078125 -4.890625 C -3.429688 -4.960938 -3.710938 -5 -3.921875 -5 C -4.097656 -5 -4.265625 -4.972656 -4.421875 -4.921875 C -4.585938 -4.878906 -4.722656 -4.800781 -4.828125 -4.6875 C -4.941406 -4.582031 -5 -4.4375 -5 -4.25 C -5 -3.957031 -4.890625 -3.679688 -4.671875 -3.421875 C -4.460938 -3.160156 -4.207031 -2.925781 -3.90625 -2.71875 L -3.859375 -2.71875 L -1.21875 -2.046875 C -0.925781 -2.109375 -0.679688 -2.21875 -0.484375 -2.375 C -0.285156 -2.53125 -0.1875 -2.734375 -0.1875 -2.984375 Z M -0.1875 -2.984375 "/>
+</symbol>
+<symbol overflow="visible" id="glyph12-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph12-1-B7n/WbgL">
+<path style="stroke:none;" d="M 6.03125 -8.75 L 6.03125 -7.78125 L 2.03125 -7.78125 L 2.03125 -5.28125 C 2.226562 -5.414062 2.460938 -5.519531 2.734375 -5.59375 C 3.003906 -5.664062 3.3125 -5.703125 3.65625 -5.703125 C 4.59375 -5.703125 5.332031 -5.4375 5.875 -4.90625 C 6.425781 -4.382812 6.703125 -3.671875 6.703125 -2.765625 C 6.703125 -1.847656 6.425781 -1.128906 5.875 -0.609375 C 5.320312 -0.0859375 4.546875 0.171875 3.546875 0.171875 C 3.148438 0.171875 2.738281 0.117188 2.3125 0.015625 C 1.894531 -0.078125 1.460938 -0.222656 1.015625 -0.421875 L 1.015625 -2.125 L 1.6875 -2.125 C 1.71875 -1.570312 1.890625 -1.144531 2.203125 -0.84375 C 2.523438 -0.550781 2.972656 -0.40625 3.546875 -0.40625 C 4.171875 -0.40625 4.644531 -0.609375 4.96875 -1.015625 C 5.300781 -1.421875 5.46875 -2.003906 5.46875 -2.765625 C 5.46875 -3.523438 5.300781 -4.109375 4.96875 -4.515625 C 4.644531 -4.921875 4.171875 -5.125 3.546875 -5.125 C 3.203125 -5.125 2.894531 -5.0625 2.625 -4.9375 C 2.351562 -4.8125 2.113281 -4.617188 1.90625 -4.359375 L 1.40625 -4.359375 L 1.40625 -8.75 Z M 6.03125 -8.75 "/>
+</symbol>
+<symbol overflow="visible" id="glyph13-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph13-1-B7n/WbgL">
+<path style="stroke:none;" d="M 1.703125 0 L 1.703125 -0.625 L 3.234375 -0.625 L 3.234375 -7.90625 L 1.46875 -6.75 L 1.46875 -7.53125 L 3.59375 -8.90625 L 4.40625 -8.90625 L 4.40625 -0.625 L 5.9375 -0.625 L 5.9375 0 Z M 1.703125 0 "/>
+</symbol>
+<symbol overflow="visible" id="glyph14-0-B7n/WbgL">
+<path style="stroke:none;" d="M 0.59375 2.125 L 0.59375 -8.46875 L 6.59375 -8.46875 L 6.59375 2.125 Z M 1.265625 1.453125 L 5.9375 1.453125 L 5.9375 -7.78125 L 1.265625 -7.78125 Z M 1.265625 1.453125 "/>
+</symbol>
+<symbol overflow="visible" id="glyph14-1-B7n/WbgL">
+<path style="stroke:none;" d="M 3.8125 -0.40625 C 4.414062 -0.40625 4.863281 -0.734375 5.15625 -1.390625 C 5.457031 -2.046875 5.609375 -3.035156 5.609375 -4.359375 C 5.609375 -5.691406 5.457031 -6.6875 5.15625 -7.34375 C 4.863281 -8 4.414062 -8.328125 3.8125 -8.328125 C 3.21875 -8.328125 2.769531 -8 2.46875 -7.34375 C 2.175781 -6.6875 2.03125 -5.691406 2.03125 -4.359375 C 2.03125 -3.035156 2.175781 -2.046875 2.46875 -1.390625 C 2.769531 -0.734375 3.21875 -0.40625 3.8125 -0.40625 Z M 3.8125 0.171875 C 2.863281 0.171875 2.125 -0.222656 1.59375 -1.015625 C 1.0625 -1.816406 0.796875 -2.929688 0.796875 -4.359375 C 0.796875 -5.796875 1.0625 -6.910156 1.59375 -7.703125 C 2.125 -8.503906 2.863281 -8.90625 3.8125 -8.90625 C 4.769531 -8.90625 5.515625 -8.503906 6.046875 -7.703125 C 6.578125 -6.910156 6.84375 -5.796875 6.84375 -4.359375 C 6.84375 -2.929688 6.578125 -1.816406 6.046875 -1.015625 C 5.515625 -0.222656 4.769531 0.171875 3.8125 0.171875 Z M 3.8125 0.171875 "/>
+</symbol>
+</g>
+</defs>
+<g id="surface1-B7n/WbgL">
+<rect x="0" y="0" width="450" height="300" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 94.5 250.5 L 333 250.5 L 333 12 L 94.5 12 Z M 94.5 250.5 "/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:0.12;stroke-miterlimit:2;" d="M 140.453125 334 L 140.453125 16 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:0.12;stroke-miterlimit:2;" d="M 285 334 L 285 16 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:0.12;stroke-miterlimit:2;" d="M 429.546875 334 L 429.546875 16 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:0.12;stroke-miterlimit:2;" d="M 126 319.546875 L 444 319.546875 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:0.12;stroke-miterlimit:2;" d="M 126 175 L 444 175 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:0.12;stroke-miterlimit:2;" d="M 126 30.453125 L 444 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph0-1-B7n/WbgL" x="209.039062" y="285.101562"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph1-1-B7n/WbgL" x="95.800781" y="268.390625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph2-1-B7n/WbgL" x="103.433594" y="268.390625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph2-2-B7n/WbgL" x="107.25" y="268.390625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-1-B7n/WbgL" x="204.207031" y="268.390625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-2-B7n/WbgL" x="211.84375" y="268.390625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-3-B7n/WbgL" x="215.65625" y="268.390625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph4-1-B7n/WbgL" x="312.617188" y="268.390625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph5-1-B7n/WbgL" x="320.25" y="268.390625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-1-B7n/WbgL" x="324.066406" y="268.390625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph6-1-B7n/WbgL" x="59.871094" y="138.449219"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph7-1-B7n/WbgL" x="53.890625" y="129.03125"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-1-B7n/WbgL" x="67.164062" y="243.8125"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph8-1-B7n/WbgL" x="74.800781" y="243.8125"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-1-B7n/WbgL" x="78.617188" y="243.8125"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-1-B7n/WbgL" x="67.164062" y="135.40625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph8-1-B7n/WbgL" x="74.800781" y="135.40625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-3-B7n/WbgL" x="78.617188" y="135.40625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph9-1-B7n/WbgL" x="67.164062" y="26.996094"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph10-1-B7n/WbgL" x="74.800781" y="26.996094"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph9-2-B7n/WbgL" x="78.617188" y="26.996094"/>
+</g>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(1.555601%,13.824424%,20.181088%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 137.140625 L 146.234375 124.052083 L 149.125 115.958333 L 152.015625 110.020833 L 154.911458 105.291667 L 157.802083 101.348958 L 160.692708 97.958333 L 163.583333 94.979167 L 166.473958 92.317708 L 169.364583 89.911458 L 172.255208 87.713542 L 175.145833 85.6875 L 178.036458 83.807292 L 180.927083 82.052083 L 183.817708 80.411458 L 186.708333 78.859375 L 189.598958 77.395833 L 192.489583 76.010417 L 195.380208 74.6875 L 198.270833 73.432292 L 201.161458 72.229167 L 204.052083 71.072917 L 206.947917 69.96875 L 209.838542 68.901042 L 212.729167 67.875 L 215.619792 66.890625 L 218.510417 65.932292 L 221.401042 65.010417 L 224.291667 64.114583 L 227.182292 63.244792 L 230.072917 62.40625 L 232.963542 61.588542 L 235.854167 60.791667 L 238.744792 60.020833 L 241.635417 59.265625 L 244.526042 58.53125 L 247.416667 57.8125 L 250.307292 57.114583 L 253.197917 56.432292 L 256.088542 55.765625 L 258.984375 55.114583 L 261.875 54.473958 L 264.765625 53.854167 L 267.65625 53.239583 L 270.546875 52.640625 L 273.4375 52.052083 L 276.328125 51.479167 L 279.21875 50.911458 L 282.109375 50.359375 L 285 49.8125 L 287.890625 49.28125 L 290.78125 48.755208 L 293.671875 48.239583 L 296.5625 47.729167 L 299.453125 47.229167 L 302.34375 46.739583 L 305.234375 46.255208 L 308.125 45.78125 L 311.015625 45.3125 L 313.911458 44.848958 L 316.802083 44.395833 L 319.692708 43.947917 L 322.583333 43.505208 L 325.473958 43.072917 L 331.255208 42.21875 L 334.145833 41.802083 L 337.036458 41.390625 L 339.927083 40.984375 L 342.817708 40.583333 L 345.708333 40.1875 L 348.598958 39.796875 L 351.489583 39.411458 L 357.270833 38.651042 L 363.052083 37.911458 L 365.947917 37.546875 L 368.838542 37.1875 L 371.729167 36.833333 L 377.510417 36.135417 L 380.401042 35.791667 L 386.182292 35.114583 L 389.072917 34.78125 L 394.854167 34.125 L 397.744792 33.802083 L 403.526042 33.166667 L 406.416667 32.854167 L 415.088542 31.932292 L 417.984375 31.630208 L 423.765625 31.036458 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(2.770156%,17.287345%,30.685332%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 146.239583 L 146.234375 132.364583 L 149.125 123.739583 L 152.015625 117.380208 L 154.911458 112.302083 L 157.802083 108.0625 L 160.692708 104.411458 L 163.583333 101.192708 L 166.473958 98.317708 L 169.364583 95.713542 L 172.255208 93.328125 L 175.145833 91.130208 L 178.036458 89.09375 L 180.927083 87.1875 L 183.817708 85.395833 L 186.708333 83.713542 L 189.598958 82.119792 L 192.489583 80.604167 L 195.380208 79.166667 L 198.270833 77.791667 L 201.161458 76.479167 L 204.052083 75.21875 L 206.947917 74.010417 L 209.838542 72.84375 L 212.729167 71.723958 L 215.619792 70.640625 L 218.510417 69.59375 L 221.401042 68.583333 L 224.291667 67.604167 L 227.182292 66.651042 L 230.072917 65.729167 L 232.963542 64.833333 L 235.854167 63.958333 L 238.744792 63.109375 L 241.635417 62.28125 L 244.526042 61.479167 L 247.416667 60.692708 L 250.307292 59.921875 L 253.197917 59.171875 L 256.088542 58.4375 L 258.984375 57.71875 L 261.875 57.020833 L 264.765625 56.333333 L 267.65625 55.65625 L 270.546875 55 L 273.4375 54.354167 L 276.328125 53.71875 L 279.21875 53.09375 L 282.109375 52.484375 L 285 51.885417 L 287.890625 51.291667 L 290.78125 50.713542 L 293.671875 50.145833 L 296.5625 49.583333 L 302.34375 48.489583 L 305.234375 47.958333 L 308.125 47.432292 L 311.015625 46.916667 L 313.911458 46.40625 L 316.802083 45.90625 L 319.692708 45.411458 L 322.583333 44.921875 L 328.364583 43.963542 L 334.145833 43.036458 L 339.927083 42.130208 L 342.817708 41.6875 L 345.708333 41.25 L 348.598958 40.817708 L 351.489583 40.390625 L 357.270833 39.546875 L 360.161458 39.135417 L 363.052083 38.729167 L 365.947917 38.328125 L 368.838542 37.927083 L 374.619792 37.145833 L 377.510417 36.760417 L 383.291667 36 L 389.072917 35.260417 L 394.854167 34.53125 L 397.744792 34.171875 L 400.635417 33.817708 L 406.416667 33.119792 L 409.307292 32.776042 L 415.088542 32.098958 L 417.984375 31.760417 L 426.65625 30.776042 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(6.845014%,19.724719%,43.334898%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 156.979167 L 146.234375 142.265625 L 149.125 133.046875 L 152.015625 126.21875 L 154.911458 120.75 L 157.802083 116.166667 L 160.692708 112.208333 L 163.583333 108.71875 L 166.473958 105.59375 L 169.364583 102.760417 L 172.255208 100.161458 L 175.145833 97.760417 L 178.036458 95.53125 L 180.927083 93.447917 L 183.817708 91.489583 L 186.708333 89.640625 L 189.598958 87.890625 L 192.489583 86.229167 L 195.380208 84.645833 L 198.270833 83.135417 L 201.161458 81.692708 L 204.052083 80.302083 L 206.947917 78.96875 L 209.838542 77.6875 L 212.729167 76.447917 L 215.619792 75.255208 L 218.510417 74.098958 L 221.401042 72.979167 L 224.291667 71.895833 L 227.182292 70.84375 L 230.072917 69.822917 L 232.963542 68.833333 L 235.854167 67.864583 L 238.744792 66.927083 L 241.635417 66.005208 L 244.526042 65.114583 L 247.416667 64.239583 L 250.307292 63.385417 L 253.197917 62.557292 L 256.088542 61.739583 L 258.984375 60.942708 L 261.875 60.161458 L 264.765625 59.401042 L 267.65625 58.651042 L 270.546875 57.916667 L 273.4375 57.197917 L 276.328125 56.489583 L 279.21875 55.796875 L 282.109375 55.114583 L 285 54.447917 L 287.890625 53.791667 L 290.78125 53.145833 L 293.671875 52.510417 L 296.5625 51.885417 L 299.453125 51.270833 L 302.34375 50.666667 L 305.234375 50.067708 L 308.125 49.484375 L 311.015625 48.90625 L 313.911458 48.338542 L 316.802083 47.776042 L 319.692708 47.223958 L 322.583333 46.677083 L 325.473958 46.140625 L 328.364583 45.609375 L 334.145833 44.567708 L 339.927083 43.557292 L 345.708333 42.567708 L 348.598958 42.083333 L 351.489583 41.604167 L 357.270833 40.666667 L 360.161458 40.203125 L 363.052083 39.744792 L 365.947917 39.296875 L 368.838542 38.848958 L 371.729167 38.40625 L 374.619792 37.96875 L 377.510417 37.536458 L 380.401042 37.109375 L 386.182292 36.265625 L 391.963542 35.442708 L 394.854167 35.036458 L 400.635417 34.234375 L 406.416667 33.453125 L 412.197917 32.682292 L 415.088542 32.302083 L 417.984375 31.927083 L 420.875 31.552083 L 423.765625 31.182292 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(15.69761%,20.195885%,57.099104%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 169.8125 L 146.234375 154.223958 L 149.125 144.364583 L 152.015625 137.015625 L 154.911458 131.104167 L 157.802083 126.135417 L 160.692708 121.828125 L 163.583333 118.020833 L 166.473958 114.598958 L 169.364583 111.489583 L 172.255208 108.640625 L 175.145833 106 L 178.036458 103.546875 L 180.927083 101.244792 L 183.817708 99.083333 L 186.708333 97.041667 L 189.598958 95.104167 L 192.489583 93.265625 L 195.380208 91.510417 L 198.270833 89.833333 L 201.161458 88.229167 L 204.052083 86.6875 L 206.947917 85.203125 L 209.838542 83.770833 L 212.729167 82.395833 L 215.619792 81.0625 L 218.510417 79.770833 L 221.401042 78.520833 L 224.291667 77.3125 L 227.182292 76.135417 L 230.072917 74.994792 L 232.963542 73.880208 L 235.854167 72.796875 L 238.744792 71.744792 L 241.635417 70.71875 L 244.526042 69.713542 L 247.416667 68.734375 L 250.307292 67.776042 L 253.197917 66.838542 L 256.088542 65.921875 L 258.984375 65.026042 L 261.875 64.151042 L 264.765625 63.291667 L 267.65625 62.447917 L 270.546875 61.619792 L 273.4375 60.807292 L 276.328125 60.015625 L 279.21875 59.229167 L 282.109375 58.463542 L 285 57.708333 L 287.890625 56.96875 L 290.78125 56.239583 L 293.671875 55.520833 L 296.5625 54.8125 L 299.453125 54.119792 L 302.34375 53.4375 L 305.234375 52.760417 L 308.125 52.098958 L 311.015625 51.442708 L 313.911458 50.802083 L 316.802083 50.166667 L 319.692708 49.536458 L 322.583333 48.921875 L 325.473958 48.3125 L 328.364583 47.708333 L 331.255208 47.114583 L 334.145833 46.53125 L 337.036458 45.953125 L 339.927083 45.380208 L 342.817708 44.817708 L 345.708333 44.260417 L 348.598958 43.708333 L 351.489583 43.161458 L 354.380208 42.625 L 357.270833 42.09375 L 360.161458 41.567708 L 363.052083 41.052083 L 365.947917 40.536458 L 368.838542 40.026042 L 374.619792 39.026042 L 380.401042 38.046875 L 386.182292 37.088542 L 389.072917 36.614583 L 394.854167 35.6875 L 400.635417 34.770833 L 403.526042 34.322917 L 409.307292 33.4375 L 412.197917 33 L 415.088542 32.567708 L 417.984375 32.135417 L 420.875 31.708333 L 423.765625 31.286458 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(27.059063%,20.774214%,62.613404%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 185.359375 L 146.234375 168.927083 L 149.125 158.401042 L 152.015625 150.484375 L 154.911458 144.078125 L 157.802083 138.666667 L 160.692708 133.958333 L 163.583333 129.78125 L 166.473958 126.020833 L 169.364583 122.588542 L 172.255208 119.4375 L 175.145833 116.515625 L 178.036458 113.786458 L 180.927083 111.229167 L 183.817708 108.822917 L 186.708333 106.541667 L 189.598958 104.380208 L 192.489583 102.317708 L 195.380208 100.354167 L 198.270833 98.46875 L 201.161458 96.666667 L 204.052083 94.932292 L 206.947917 93.260417 L 209.838542 91.651042 L 212.729167 90.09375 L 215.619792 88.588542 L 218.510417 87.130208 L 221.401042 85.71875 L 224.291667 84.348958 L 227.182292 83.015625 L 230.072917 81.71875 L 232.963542 80.458333 L 235.854167 79.229167 L 238.744792 78.026042 L 241.635417 76.859375 L 244.526042 75.71875 L 247.416667 74.598958 L 250.307292 73.510417 L 253.197917 72.442708 L 256.088542 71.395833 L 258.984375 70.375 L 261.875 69.369792 L 264.765625 68.390625 L 267.65625 67.421875 L 270.546875 66.479167 L 273.4375 65.546875 L 276.328125 64.635417 L 279.21875 63.739583 L 282.109375 62.859375 L 285 61.994792 L 287.890625 61.145833 L 290.78125 60.307292 L 293.671875 59.479167 L 296.5625 58.671875 L 299.453125 57.869792 L 302.34375 57.083333 L 305.234375 56.307292 L 308.125 55.546875 L 311.015625 54.791667 L 313.911458 54.046875 L 316.802083 53.317708 L 319.692708 52.59375 L 322.583333 51.880208 L 325.473958 51.177083 L 328.364583 50.484375 L 331.255208 49.796875 L 334.145833 49.119792 L 337.036458 48.453125 L 339.927083 47.791667 L 342.817708 47.140625 L 345.708333 46.494792 L 348.598958 45.859375 L 351.489583 45.229167 L 354.380208 44.604167 L 357.270833 43.989583 L 360.161458 43.380208 L 363.052083 42.776042 L 365.947917 42.182292 L 368.838542 41.59375 L 371.729167 41.010417 L 374.619792 40.432292 L 377.510417 39.859375 L 383.291667 38.734375 L 389.072917 37.630208 L 394.854167 36.546875 L 400.635417 35.484375 L 406.416667 34.442708 L 412.197917 33.421875 L 415.088542 32.916667 L 417.984375 32.416667 L 420.875 31.916667 L 426.65625 30.9375 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(35.624164%,24.062487%,60.578787%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 204.458333 L 146.234375 187.34375 L 149.125 176.177083 L 152.015625 167.682292 L 154.911458 160.755208 L 157.802083 154.854167 L 160.692708 149.697917 L 163.583333 145.104167 L 166.473958 140.942708 L 169.364583 137.140625 L 172.255208 133.630208 L 175.145833 130.369792 L 178.036458 127.3125 L 180.927083 124.442708 L 183.817708 121.734375 L 186.708333 119.161458 L 189.598958 116.71875 L 192.489583 114.385417 L 195.380208 112.15625 L 198.270833 110.020833 L 201.161458 107.963542 L 204.052083 105.984375 L 206.947917 104.078125 L 209.838542 102.239583 L 212.729167 100.453125 L 215.619792 98.729167 L 218.510417 97.057292 L 221.401042 95.432292 L 224.291667 93.854167 L 227.182292 92.317708 L 230.072917 90.822917 L 232.963542 89.364583 L 235.854167 87.947917 L 238.744792 86.557292 L 241.635417 85.203125 L 244.526042 83.880208 L 247.416667 82.583333 L 250.307292 81.317708 L 253.197917 80.078125 L 256.088542 78.859375 L 258.984375 77.671875 L 261.875 76.5 L 264.765625 75.354167 L 267.65625 74.229167 L 270.546875 73.125 L 273.4375 72.041667 L 276.328125 70.973958 L 279.21875 69.921875 L 282.109375 68.890625 L 285 67.875 L 287.890625 66.880208 L 290.78125 65.895833 L 293.671875 64.927083 L 296.5625 63.973958 L 299.453125 63.036458 L 302.34375 62.109375 L 305.234375 61.192708 L 308.125 60.296875 L 311.015625 59.40625 L 313.911458 58.53125 L 316.802083 57.666667 L 319.692708 56.8125 L 322.583333 55.973958 L 325.473958 55.140625 L 328.364583 54.317708 L 331.255208 53.505208 L 334.145833 52.708333 L 337.036458 51.916667 L 339.927083 51.130208 L 342.817708 50.359375 L 345.708333 49.59375 L 348.598958 48.838542 L 351.489583 48.088542 L 354.380208 47.348958 L 357.270833 46.619792 L 360.161458 45.895833 L 363.052083 45.177083 L 365.947917 44.46875 L 368.838542 43.765625 L 371.729167 43.072917 L 374.619792 42.385417 L 377.510417 41.703125 L 383.291667 40.359375 L 386.182292 39.697917 L 391.963542 38.395833 L 394.854167 37.75 L 397.744792 37.114583 L 403.526042 35.854167 L 406.416667 35.234375 L 409.307292 34.619792 L 412.197917 34.010417 L 415.088542 33.40625 L 417.984375 32.807292 L 420.875 32.208333 L 423.765625 31.619792 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(42.986259%,27.552018%,58.113611%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 228.125 L 146.234375 210.828125 L 149.125 199.234375 L 152.015625 190.260417 L 154.911458 182.84375 L 157.802083 176.46875 L 160.692708 170.84375 L 163.583333 165.796875 L 166.473958 161.203125 L 169.364583 156.979167 L 172.255208 153.057292 L 175.145833 149.395833 L 178.036458 145.958333 L 180.927083 142.713542 L 183.817708 139.635417 L 186.708333 136.708333 L 189.598958 133.916667 L 192.489583 131.244792 L 195.380208 128.682292 L 198.270833 126.21875 L 201.161458 123.84375 L 204.052083 121.557292 L 206.947917 119.34375 L 209.838542 117.203125 L 212.729167 115.125 L 215.619792 113.114583 L 218.510417 111.15625 L 221.401042 109.255208 L 224.291667 107.401042 L 227.182292 105.59375 L 230.072917 103.833333 L 232.963542 102.114583 L 235.854167 100.4375 L 238.744792 98.791667 L 241.635417 97.1875 L 244.526042 95.614583 L 247.416667 94.078125 L 250.307292 92.567708 L 253.197917 91.088542 L 256.088542 89.640625 L 258.984375 88.21875 L 261.875 86.817708 L 264.765625 85.447917 L 267.65625 84.09375 L 270.546875 82.770833 L 273.4375 81.463542 L 276.328125 80.182292 L 279.21875 78.916667 L 282.109375 77.677083 L 285 76.447917 L 287.890625 75.244792 L 290.78125 74.052083 L 293.671875 72.885417 L 296.5625 71.729167 L 299.453125 70.588542 L 302.34375 69.463542 L 305.234375 68.354167 L 308.125 67.260417 L 311.015625 66.182292 L 313.911458 65.114583 L 316.802083 64.057292 L 319.692708 63.020833 L 322.583333 61.989583 L 325.473958 60.973958 L 328.364583 59.96875 L 331.255208 58.979167 L 334.145833 57.994792 L 337.036458 57.026042 L 339.927083 56.067708 L 342.817708 55.114583 L 345.708333 54.177083 L 348.598958 53.25 L 351.489583 52.328125 L 354.380208 51.416667 L 357.270833 50.515625 L 360.161458 49.625 L 363.052083 48.739583 L 365.947917 47.864583 L 368.838542 47 L 371.729167 46.140625 L 374.619792 45.291667 L 377.510417 44.447917 L 380.401042 43.614583 L 383.291667 42.786458 L 386.182292 41.963542 L 389.072917 41.151042 L 391.963542 40.34375 L 394.854167 39.546875 L 397.744792 38.755208 L 400.635417 37.96875 L 406.416667 36.416667 L 409.307292 35.651042 L 412.197917 34.890625 L 415.088542 34.135417 L 417.984375 33.390625 L 420.875 32.645833 L 423.765625 31.911458 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(50.088263%,30.733824%,56.195629%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 257.260417 L 146.234375 241.072917 L 149.125 229.71875 L 152.015625 220.677083 L 154.911458 213.041667 L 157.802083 206.369792 L 160.692708 200.401042 L 163.583333 194.979167 L 166.473958 189.989583 L 169.364583 185.359375 L 172.255208 181.03125 L 175.145833 176.953125 L 178.036458 173.098958 L 180.927083 169.4375 L 183.817708 165.942708 L 186.708333 162.604167 L 189.598958 159.401042 L 192.489583 156.317708 L 195.380208 153.348958 L 198.270833 150.484375 L 201.161458 147.713542 L 204.052083 145.026042 L 206.947917 142.421875 L 209.838542 139.890625 L 212.729167 137.427083 L 215.619792 135.03125 L 218.510417 132.697917 L 221.401042 130.416667 L 224.291667 128.192708 L 227.182292 126.020833 L 230.072917 123.890625 L 232.963542 121.8125 L 235.854167 119.770833 L 238.744792 117.776042 L 241.635417 115.8125 L 244.526042 113.890625 L 247.416667 112.005208 L 250.307292 110.151042 L 253.197917 108.333333 L 256.088542 106.541667 L 258.984375 104.78125 L 261.875 103.046875 L 264.765625 101.34375 L 267.65625 99.666667 L 270.546875 98.010417 L 273.4375 96.385417 L 276.328125 94.776042 L 279.21875 93.192708 L 282.109375 91.635417 L 285 90.09375 L 287.890625 88.572917 L 290.78125 87.072917 L 293.671875 85.59375 L 296.5625 84.130208 L 299.453125 82.6875 L 302.34375 81.260417 L 305.234375 79.848958 L 308.125 78.458333 L 311.015625 77.078125 L 313.911458 75.71875 L 316.802083 74.369792 L 319.692708 73.036458 L 322.583333 71.71875 L 325.473958 70.416667 L 328.364583 69.125 L 331.255208 67.84375 L 334.145833 66.583333 L 337.036458 65.328125 L 339.927083 64.088542 L 342.817708 62.859375 L 345.708333 61.645833 L 348.598958 60.4375 L 351.489583 59.244792 L 354.380208 58.0625 L 357.270833 56.890625 L 360.161458 55.729167 L 363.052083 54.572917 L 365.947917 53.432292 L 368.838542 52.302083 L 371.729167 51.177083 L 374.619792 50.0625 L 377.510417 48.958333 L 380.401042 47.864583 L 383.291667 46.776042 L 386.182292 45.697917 L 389.072917 44.630208 L 391.963542 43.567708 L 394.854167 42.515625 L 397.744792 41.46875 L 400.635417 40.432292 L 403.526042 39.401042 L 406.416667 38.380208 L 409.307292 37.364583 L 412.197917 36.354167 L 415.088542 35.354167 L 417.984375 34.359375 L 420.875 33.375 L 423.765625 32.395833 L 426.65625 31.421875 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(57.361668%,33.562881%,54.506809%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 290.635417 L 146.234375 278.661458 L 149.125 269.473958 L 152.015625 261.729167 L 154.911458 254.901042 L 157.802083 248.734375 L 160.692708 243.057292 L 163.583333 237.776042 L 166.473958 232.817708 L 169.364583 228.125 L 172.255208 223.666667 L 175.145833 219.401042 L 178.036458 215.3125 L 180.927083 211.375 L 183.817708 207.583333 L 186.708333 203.911458 L 189.598958 200.348958 L 192.489583 196.895833 L 195.380208 193.53125 L 198.270833 190.260417 L 201.161458 187.067708 L 204.052083 183.947917 L 206.947917 180.901042 L 209.838542 177.921875 L 212.729167 175 L 215.619792 172.135417 L 218.510417 169.328125 L 221.401042 166.572917 L 224.291667 163.864583 L 227.182292 161.203125 L 230.072917 158.588542 L 232.963542 156.010417 L 235.854167 153.473958 L 238.744792 150.979167 L 241.635417 148.515625 L 244.526042 146.088542 L 247.416667 143.697917 L 250.307292 141.338542 L 253.197917 139.010417 L 256.088542 136.708333 L 258.984375 134.4375 L 261.875 132.192708 L 264.765625 129.973958 L 267.65625 127.786458 L 270.546875 125.619792 L 273.4375 123.473958 L 276.328125 121.354167 L 279.21875 119.255208 L 282.109375 117.182292 L 285 115.125 L 287.890625 113.09375 L 290.78125 111.078125 L 293.671875 109.083333 L 296.5625 107.109375 L 299.453125 105.151042 L 302.34375 103.208333 L 305.234375 101.286458 L 308.125 99.380208 L 311.015625 97.489583 L 313.911458 95.614583 L 316.802083 93.760417 L 319.692708 91.916667 L 322.583333 90.088542 L 325.473958 88.270833 L 328.364583 86.473958 L 331.255208 84.6875 L 334.145833 82.916667 L 337.036458 81.15625 L 339.927083 79.40625 L 342.817708 77.677083 L 345.708333 75.953125 L 348.598958 74.244792 L 351.489583 72.546875 L 354.380208 70.859375 L 357.270833 69.1875 L 360.161458 67.520833 L 363.052083 65.869792 L 365.947917 64.229167 L 368.838542 62.59375 L 371.729167 60.973958 L 374.619792 59.364583 L 377.510417 57.760417 L 380.401042 56.171875 L 383.291667 54.588542 L 386.182292 53.015625 L 389.072917 51.453125 L 391.963542 49.901042 L 394.854167 48.354167 L 397.744792 46.817708 L 400.635417 45.291667 L 403.526042 43.770833 L 406.416667 42.260417 L 409.307292 40.755208 L 412.197917 39.260417 L 415.088542 37.776042 L 417.984375 36.296875 L 420.875 34.822917 L 423.765625 33.359375 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(64.996052%,36.081493%,52.394116%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(72.908229%,38.456941%,49.217826%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(80.755973%,41.022325%,44.633585%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 319.515625 L 146.234375 319.432292 L 149.125 319.286458 L 152.015625 319.083333 L 154.911458 318.822917 L 157.802083 318.505208 L 160.692708 318.130208 L 163.583333 317.692708 L 166.473958 317.203125 L 169.364583 316.65625 L 172.255208 316.046875 L 175.145833 315.380208 L 178.036458 314.661458 L 180.927083 313.880208 L 183.817708 313.041667 L 186.708333 312.145833 L 189.598958 311.192708 L 192.489583 310.177083 L 195.380208 309.109375 L 198.270833 307.984375 L 201.161458 306.796875 L 204.052083 305.552083 L 206.947917 304.25 L 209.838542 302.895833 L 212.729167 301.479167 L 215.619792 300.005208 L 218.510417 298.46875 L 221.401042 296.880208 L 224.291667 295.234375 L 227.182292 293.526042 L 230.072917 291.765625 L 232.963542 289.942708 L 235.854167 288.0625 L 238.744792 286.125 L 241.635417 284.130208 L 244.526042 282.078125 L 247.416667 279.96875 L 250.307292 277.802083 L 253.197917 275.572917 L 256.088542 273.291667 L 258.984375 270.947917 L 261.875 268.552083 L 264.765625 266.09375 L 267.65625 263.578125 L 270.546875 261.005208 L 273.4375 258.375 L 276.328125 255.6875 L 279.21875 252.9375 L 282.109375 250.135417 L 285 247.270833 L 287.890625 244.354167 L 290.78125 241.375 L 293.671875 238.338542 L 296.5625 235.244792 L 299.453125 232.09375 L 302.34375 228.885417 L 305.234375 225.619792 L 308.125 222.296875 L 311.015625 218.911458 L 313.911458 215.473958 L 316.802083 211.973958 L 319.692708 208.416667 L 322.583333 204.807292 L 325.473958 201.135417 L 328.364583 197.40625 L 331.255208 193.619792 L 334.145833 189.770833 L 337.036458 185.869792 L 339.927083 181.911458 L 342.817708 177.890625 L 345.708333 173.8125 L 348.598958 169.682292 L 351.489583 165.489583 L 354.380208 161.239583 L 357.270833 156.932292 L 360.161458 152.567708 L 363.052083 148.145833 L 365.947917 143.661458 L 368.838542 139.125 L 371.729167 134.526042 L 374.619792 129.875 L 377.510417 125.161458 L 380.401042 120.390625 L 383.291667 115.5625 L 386.182292 110.677083 L 389.072917 105.734375 L 391.963542 100.734375 L 394.854167 95.671875 L 397.744792 90.557292 L 400.635417 85.380208 L 403.526042 80.151042 L 406.416667 74.859375 L 409.307292 69.510417 L 412.197917 64.104167 L 415.088542 58.640625 L 417.984375 53.119792 L 420.875 47.541667 L 423.765625 41.901042 L 426.65625 36.208333 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(87.961847%,44.310522%,38.72247%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 143.34375 319.546875 L 149.125 319.536458 L 152.015625 319.526042 L 154.911458 319.510417 L 157.802083 319.484375 L 160.692708 319.447917 L 163.583333 319.395833 L 166.473958 319.333333 L 169.364583 319.255208 L 172.255208 319.161458 L 175.145833 319.046875 L 178.036458 318.911458 L 180.927083 318.75 L 183.817708 318.567708 L 186.708333 318.359375 L 189.598958 318.125 L 192.489583 317.859375 L 195.380208 317.5625 L 198.270833 317.234375 L 201.161458 316.869792 L 204.052083 316.46875 L 206.947917 316.026042 L 209.838542 315.546875 L 212.729167 315.026042 L 215.619792 314.463542 L 218.510417 313.854167 L 221.401042 313.197917 L 224.291667 312.494792 L 227.182292 311.739583 L 230.072917 310.932292 L 232.963542 310.072917 L 235.854167 309.15625 L 238.744792 308.182292 L 241.635417 307.151042 L 244.526042 306.057292 L 247.416667 304.901042 L 250.307292 303.682292 L 253.197917 302.395833 L 256.088542 301.041667 L 258.984375 299.619792 L 261.875 298.125 L 264.765625 296.5625 L 267.65625 294.921875 L 270.546875 293.203125 L 273.4375 291.40625 L 276.328125 289.53125 L 279.21875 287.572917 L 282.109375 285.536458 L 285 283.411458 L 287.890625 281.197917 L 290.78125 278.895833 L 293.671875 276.505208 L 296.5625 274.026042 L 299.453125 271.447917 L 302.34375 268.776042 L 305.234375 266.010417 L 308.125 263.140625 L 311.015625 260.171875 L 313.911458 257.104167 L 316.802083 253.927083 L 319.692708 250.645833 L 322.583333 247.260417 L 325.473958 243.760417 L 328.364583 240.15625 L 331.255208 236.432292 L 334.145833 232.598958 L 337.036458 228.645833 L 339.927083 224.578125 L 342.817708 220.385417 L 345.708333 216.078125 L 348.598958 211.640625 L 351.489583 207.083333 L 354.380208 202.401042 L 357.270833 197.583333 L 360.161458 192.640625 L 363.052083 187.567708 L 365.947917 182.359375 L 368.838542 177.010417 L 371.729167 171.53125 L 374.619792 165.911458 L 377.510417 160.151042 L 380.401042 154.244792 L 383.291667 148.197917 L 386.182292 142.005208 L 389.072917 135.666667 L 391.963542 129.177083 L 394.854167 122.536458 L 397.744792 115.744792 L 400.635417 108.796875 L 403.526042 101.692708 L 406.416667 94.432292 L 409.307292 87.015625 L 412.197917 79.432292 L 415.088542 71.6875 L 417.984375 63.776042 L 420.875 55.697917 L 423.765625 47.453125 L 426.65625 39.041667 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(93.679774%,49.031073%,32.221946%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 152.015625 319.546875 L 154.911458 319.541667 L 157.802083 319.541667 L 166.473958 319.526042 L 172.255208 319.505208 L 178.036458 319.463542 L 183.817708 319.401042 L 186.708333 319.354167 L 189.598958 319.302083 L 192.489583 319.239583 L 195.380208 319.166667 L 198.270833 319.083333 L 201.161458 318.984375 L 204.052083 318.869792 L 206.947917 318.734375 L 209.838542 318.588542 L 212.729167 318.416667 L 215.619792 318.223958 L 218.510417 318.010417 L 221.401042 317.770833 L 224.291667 317.5 L 227.182292 317.203125 L 230.072917 316.875 L 232.963542 316.515625 L 235.854167 316.114583 L 238.744792 315.682292 L 241.635417 315.208333 L 244.526042 314.6875 L 247.416667 314.125 L 250.307292 313.515625 L 253.197917 312.859375 L 256.088542 312.145833 L 258.984375 311.375 L 261.875 310.552083 L 264.765625 309.661458 L 267.65625 308.708333 L 270.546875 307.692708 L 273.4375 306.604167 L 276.328125 305.4375 L 279.21875 304.197917 L 282.109375 302.880208 L 285 301.479167 L 287.890625 299.989583 L 290.78125 298.40625 L 293.671875 296.734375 L 296.5625 294.963542 L 299.453125 293.09375 L 302.34375 291.114583 L 305.234375 289.03125 L 308.125 286.828125 L 311.015625 284.515625 L 313.911458 282.078125 L 316.802083 279.520833 L 319.692708 276.828125 L 322.583333 274.005208 L 325.473958 271.041667 L 328.364583 267.942708 L 331.255208 264.692708 L 334.145833 261.291667 L 337.036458 257.734375 L 339.927083 254.015625 L 342.817708 250.135417 L 345.708333 246.083333 L 348.598958 241.854167 L 351.489583 237.447917 L 354.380208 232.859375 L 357.270833 228.072917 L 360.161458 223.098958 L 363.052083 217.921875 L 365.947917 212.536458 L 368.838542 206.942708 L 371.729167 201.135417 L 374.619792 195.098958 L 377.510417 188.84375 L 380.401042 182.348958 L 383.291667 175.614583 L 386.182292 168.640625 L 389.072917 161.411458 L 391.963542 153.927083 L 394.854167 146.177083 L 397.744792 138.161458 L 400.635417 129.875 L 403.526042 121.302083 L 406.416667 112.442708 L 409.307292 103.291667 L 412.197917 93.838542 L 415.088542 84.078125 L 417.984375 74.005208 L 420.875 63.614583 L 423.765625 52.895833 L 426.65625 41.84375 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(97.189772%,55.540621%,26.767737%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 163.583333 319.546875 L 166.473958 319.541667 L 172.255208 319.541667 L 175.145833 319.536458 L 178.036458 319.536458 L 183.817708 319.526042 L 189.598958 319.505208 L 195.380208 319.473958 L 198.270833 319.453125 L 201.161458 319.427083 L 204.052083 319.395833 L 206.947917 319.359375 L 209.838542 319.317708 L 212.729167 319.265625 L 215.619792 319.203125 L 218.510417 319.130208 L 221.401042 319.046875 L 224.291667 318.953125 L 227.182292 318.84375 L 230.072917 318.71875 L 232.963542 318.572917 L 235.854167 318.416667 L 238.744792 318.234375 L 241.635417 318.026042 L 244.526042 317.796875 L 247.416667 317.541667 L 250.307292 317.255208 L 253.197917 316.9375 L 256.088542 316.583333 L 258.984375 316.197917 L 261.875 315.765625 L 264.765625 315.296875 L 267.65625 314.776042 L 270.546875 314.208333 L 273.4375 313.59375 L 276.328125 312.916667 L 279.21875 312.177083 L 282.109375 311.380208 L 285 310.510417 L 287.890625 309.572917 L 290.78125 308.552083 L 293.671875 307.458333 L 296.5625 306.270833 L 299.453125 304.994792 L 302.34375 303.625 L 305.234375 302.151042 L 308.125 300.572917 L 311.015625 298.880208 L 313.911458 297.067708 L 316.802083 295.130208 L 319.692708 293.0625 L 322.583333 290.854167 L 325.473958 288.505208 L 328.364583 286 L 331.255208 283.34375 L 334.145833 280.515625 L 337.036458 277.515625 L 339.927083 274.333333 L 342.817708 270.958333 L 345.708333 267.385417 L 348.598958 263.609375 L 351.489583 259.614583 L 354.380208 255.395833 L 357.270833 250.942708 L 360.161458 246.244792 L 363.052083 241.296875 L 365.947917 236.078125 L 368.838542 230.588542 L 371.729167 224.817708 L 374.619792 218.744792 L 377.510417 212.369792 L 380.401042 205.671875 L 383.291667 198.645833 L 386.182292 191.276042 L 389.072917 183.546875 L 391.963542 175.458333 L 394.854167 166.984375 L 397.744792 158.114583 L 400.635417 148.838542 L 403.526042 139.145833 L 406.416667 129.010417 L 409.307292 118.427083 L 412.197917 107.380208 L 415.088542 95.854167 L 417.984375 83.828125 L 420.875 71.291667 L 423.765625 58.229167 L 426.65625 44.625 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(98.605371%,63.330919%,23.908807%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 175.145833 319.546875 L 178.036458 319.541667 L 186.708333 319.541667 L 189.598958 319.536458 L 192.489583 319.536458 L 201.161458 319.520833 L 204.052083 319.510417 L 206.947917 319.505208 L 215.619792 319.458333 L 221.401042 319.40625 L 224.291667 319.375 L 227.182292 319.333333 L 230.072917 319.286458 L 232.963542 319.234375 L 235.854167 319.171875 L 238.744792 319.098958 L 241.635417 319.015625 L 244.526042 318.916667 L 247.416667 318.802083 L 250.307292 318.677083 L 253.197917 318.526042 L 256.088542 318.359375 L 258.984375 318.171875 L 261.875 317.958333 L 264.765625 317.71875 L 267.65625 317.447917 L 270.546875 317.145833 L 273.4375 316.807292 L 276.328125 316.427083 L 279.21875 316.010417 L 282.109375 315.541667 L 285 315.026042 L 287.890625 314.458333 L 290.78125 313.828125 L 293.671875 313.135417 L 296.5625 312.375 L 299.453125 311.541667 L 302.34375 310.630208 L 305.234375 309.630208 L 308.125 308.541667 L 311.015625 307.348958 L 313.911458 306.057292 L 316.802083 304.651042 L 319.692708 303.125 L 322.583333 301.46875 L 325.473958 299.677083 L 328.364583 297.744792 L 331.255208 295.651042 L 334.145833 293.395833 L 337.036458 290.963542 L 339.927083 288.348958 L 342.817708 285.536458 L 345.708333 282.510417 L 348.598958 279.270833 L 351.489583 275.796875 L 354.380208 272.072917 L 357.270833 268.09375 L 360.161458 263.838542 L 363.052083 259.291667 L 365.947917 254.442708 L 368.838542 249.270833 L 371.729167 243.760417 L 374.619792 237.895833 L 377.510417 231.661458 L 380.401042 225.03125 L 383.291667 217.989583 L 386.182292 210.515625 L 389.072917 202.588542 L 391.963542 194.1875 L 394.854167 185.291667 L 397.744792 175.875 L 400.635417 165.911458 L 403.526042 155.380208 L 406.416667 144.255208 L 409.307292 132.505208 L 412.197917 120.109375 L 415.088542 107.036458 L 417.984375 93.255208 L 420.875 78.739583 L 423.765625 63.458333 L 426.65625 47.369792 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(98.470026%,71.722454%,24.041618%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 189.598958 319.546875 L 192.489583 319.541667 L 201.161458 319.541667 L 204.052083 319.536458 L 206.947917 319.536458 L 218.510417 319.515625 L 227.182292 319.484375 L 230.072917 319.463542 L 232.963542 319.447917 L 238.744792 319.395833 L 241.635417 319.359375 L 244.526042 319.317708 L 247.416667 319.270833 L 250.307292 319.213542 L 253.197917 319.151042 L 256.088542 319.072917 L 258.984375 318.984375 L 261.875 318.880208 L 264.765625 318.760417 L 267.65625 318.625 L 270.546875 318.463542 L 273.4375 318.286458 L 276.328125 318.083333 L 279.21875 317.848958 L 282.109375 317.583333 L 285 317.286458 L 287.890625 316.953125 L 290.78125 316.572917 L 293.671875 316.151042 L 296.5625 315.677083 L 299.453125 315.145833 L 302.34375 314.552083 L 305.234375 313.895833 L 308.125 313.161458 L 311.015625 312.348958 L 313.911458 311.453125 L 316.802083 310.458333 L 319.692708 309.364583 L 322.583333 308.15625 L 325.473958 306.833333 L 328.364583 305.375 L 331.255208 303.776042 L 334.145833 302.026042 L 337.036458 300.109375 L 339.927083 298.020833 L 342.817708 295.739583 L 345.708333 293.25 L 348.598958 290.546875 L 351.489583 287.609375 L 354.380208 284.416667 L 357.270833 280.958333 L 360.161458 277.208333 L 363.052083 273.151042 L 365.947917 268.765625 L 368.838542 264.03125 L 371.729167 258.916667 L 374.619792 253.411458 L 377.510417 247.479167 L 380.401042 241.098958 L 383.291667 234.239583 L 386.182292 226.869792 L 389.072917 218.963542 L 391.963542 210.484375 L 394.854167 201.401042 L 397.744792 191.677083 L 400.635417 181.276042 L 403.526042 170.15625 L 406.416667 158.276042 L 409.307292 145.598958 L 412.197917 132.078125 L 415.088542 117.661458 L 417.984375 102.307292 L 420.875 85.963542 L 423.765625 68.578125 L 426.65625 50.09375 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(97.130179%,80.375719%,26.641846%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 201.161458 319.546875 L 204.052083 319.541667 L 215.619792 319.541667 L 218.510417 319.536458 L 221.401042 319.536458 L 232.963542 319.515625 L 238.744792 319.494792 L 244.526042 319.463542 L 250.307292 319.421875 L 253.197917 319.390625 L 256.088542 319.354167 L 258.984375 319.3125 L 261.875 319.265625 L 264.765625 319.208333 L 267.65625 319.140625 L 270.546875 319.057292 L 273.4375 318.963542 L 276.328125 318.859375 L 279.21875 318.729167 L 282.109375 318.583333 L 285 318.416667 L 287.890625 318.223958 L 290.78125 318 L 293.671875 317.744792 L 296.5625 317.453125 L 299.453125 317.125 L 302.34375 316.75 L 305.234375 316.322917 L 308.125 315.84375 L 311.015625 315.302083 L 313.911458 314.6875 L 316.802083 314.005208 L 319.692708 313.234375 L 322.583333 312.369792 L 325.473958 311.40625 L 328.364583 310.333333 L 331.255208 309.135417 L 334.145833 307.807292 L 337.036458 306.328125 L 339.927083 304.692708 L 342.817708 302.880208 L 345.708333 300.875 L 348.598958 298.666667 L 351.489583 296.229167 L 354.380208 293.552083 L 357.270833 290.604167 L 360.161458 287.369792 L 363.052083 283.822917 L 365.947917 279.9375 L 368.838542 275.6875 L 371.729167 271.041667 L 374.619792 265.973958 L 377.510417 260.453125 L 380.401042 254.432292 L 383.291667 247.885417 L 386.182292 240.770833 L 389.072917 233.046875 L 391.963542 224.661458 L 394.854167 215.578125 L 397.744792 205.744792 L 400.635417 195.098958 L 403.526042 183.598958 L 406.416667 171.177083 L 409.307292 157.776042 L 412.197917 143.322917 L 415.088542 127.755208 L 417.984375 111 L 420.875 92.973958 L 423.765625 73.598958 L 426.65625 52.786458 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(94.672185%,89.194322%,30.764705%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 212.729167 319.546875 L 215.619792 319.541667 L 227.182292 319.541667 L 230.072917 319.536458 L 232.963542 319.536458 L 247.416667 319.510417 L 250.307292 319.5 L 256.088542 319.46875 L 258.984375 319.453125 L 264.765625 319.401042 L 270.546875 319.328125 L 273.4375 319.28125 L 276.328125 319.223958 L 279.21875 319.15625 L 282.109375 319.072917 L 285 318.979167 L 287.890625 318.869792 L 290.78125 318.739583 L 293.671875 318.59375 L 296.5625 318.416667 L 299.453125 318.213542 L 302.34375 317.979167 L 305.234375 317.708333 L 308.125 317.395833 L 311.015625 317.041667 L 313.911458 316.630208 L 316.802083 316.166667 L 319.692708 315.630208 L 322.583333 315.026042 L 325.473958 314.338542 L 328.364583 313.557292 L 331.255208 312.677083 L 334.145833 311.682292 L 337.036458 310.557292 L 339.927083 309.296875 L 342.817708 307.880208 L 345.708333 306.291667 L 348.598958 304.515625 L 351.489583 302.526042 L 354.380208 300.307292 L 357.270833 297.838542 L 360.161458 295.088542 L 363.052083 292.036458 L 365.947917 288.651042 L 368.838542 284.895833 L 371.729167 280.744792 L 374.619792 276.15625 L 377.510417 271.088542 L 380.401042 265.505208 L 383.291667 259.354167 L 386.182292 252.588542 L 389.072917 245.15625 L 391.963542 236.994792 L 394.854167 228.052083 L 397.744792 218.260417 L 400.635417 207.546875 L 403.526042 195.833333 L 406.416667 183.046875 L 409.307292 169.098958 L 412.197917 153.895833 L 415.088542 137.34375 L 417.984375 119.338542 L 420.875 99.770833 L 423.765625 78.515625 L 426.65625 55.458333 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(90.904182%,98.215741%,35.550782%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 319.546875 L 221.401042 319.546875 L 224.291667 319.541667 L 238.744792 319.541667 L 241.635417 319.536458 L 244.526042 319.536458 L 256.088542 319.515625 L 258.984375 319.505208 L 264.765625 319.484375 L 267.65625 319.46875 L 270.546875 319.447917 L 276.328125 319.395833 L 279.21875 319.359375 L 285 319.265625 L 287.890625 319.203125 L 290.78125 319.125 L 293.671875 319.041667 L 296.5625 318.9375 L 299.453125 318.8125 L 302.34375 318.666667 L 305.234375 318.5 L 308.125 318.302083 L 311.015625 318.067708 L 313.911458 317.796875 L 316.802083 317.484375 L 319.692708 317.119792 L 322.583333 316.697917 L 325.473958 316.213542 L 328.364583 315.651042 L 331.255208 315.010417 L 334.145833 314.276042 L 337.036458 313.432292 L 339.927083 312.473958 L 342.817708 311.380208 L 345.708333 310.135417 L 348.598958 308.723958 L 351.489583 307.119792 L 354.380208 305.3125 L 357.270833 303.265625 L 360.161458 300.958333 L 363.052083 298.364583 L 365.947917 295.447917 L 368.838542 292.171875 L 371.729167 288.505208 L 374.619792 284.401042 L 377.510417 279.8125 L 380.401042 274.6875 L 383.291667 268.984375 L 386.182292 262.630208 L 389.072917 255.567708 L 391.963542 247.729167 L 394.854167 239.03125 L 397.744792 229.401042 L 400.635417 218.744792 L 403.526042 206.96875 L 406.416667 193.96875 L 409.307292 179.630208 L 412.197917 163.838542 L 415.088542 146.458333 L 417.984375 127.348958 L 420.875 106.364583 L 423.765625 83.338542 L 426.65625 58.098958 L 429.546875 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(1.555601%,13.824424%,20.181088%);fill-opacity:1;" d="M 351 250.5 L 366 250.5 L 366 238.574219 L 351 238.574219 Z M 351 250.5 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(2.770156%,17.287345%,30.685332%);fill-opacity:1;" d="M 351 238.574219 L 366 238.574219 L 366 226.648438 L 351 226.648438 Z M 351 238.574219 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(6.845014%,19.724719%,43.334898%);fill-opacity:1;" d="M 351 226.648438 L 366 226.648438 L 366 214.722656 L 351 214.722656 Z M 351 226.648438 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(15.69761%,20.195885%,57.099104%);fill-opacity:1;" d="M 351 214.726562 L 366 214.726562 L 366 202.800781 L 351 202.800781 Z M 351 214.726562 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(27.059063%,20.774214%,62.613404%);fill-opacity:1;" d="M 351 202.800781 L 366 202.800781 L 366 190.875 L 351 190.875 Z M 351 202.800781 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(35.624164%,24.062487%,60.578787%);fill-opacity:1;" d="M 351 190.875 L 366 190.875 L 366 178.949219 L 351 178.949219 Z M 351 190.875 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(42.986259%,27.552018%,58.113611%);fill-opacity:1;" d="M 351 178.949219 L 366 178.949219 L 366 167.023438 L 351 167.023438 Z M 351 178.949219 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(50.088263%,30.733824%,56.195629%);fill-opacity:1;" d="M 351 167.023438 L 366 167.023438 L 366 155.097656 L 351 155.097656 Z M 351 167.023438 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(57.361668%,33.562881%,54.506809%);fill-opacity:1;" d="M 351 155.101562 L 366 155.101562 L 366 143.175781 L 351 143.175781 Z M 351 155.101562 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(64.996052%,36.081493%,52.394116%);fill-opacity:1;" d="M 351 143.175781 L 366 143.175781 L 366 131.25 L 351 131.25 Z M 351 143.175781 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(72.908229%,38.456941%,49.217826%);fill-opacity:1;" d="M 351 131.25 L 366 131.25 L 366 119.324219 L 351 119.324219 Z M 351 131.25 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(80.755973%,41.022325%,44.633585%);fill-opacity:1;" d="M 351 119.324219 L 366 119.324219 L 366 107.398438 L 351 107.398438 Z M 351 119.324219 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(87.961847%,44.310522%,38.72247%);fill-opacity:1;" d="M 351 107.398438 L 366 107.398438 L 366 95.472656 L 351 95.472656 Z M 351 107.398438 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(93.679774%,49.031073%,32.221946%);fill-opacity:1;" d="M 351 95.476562 L 366 95.476562 L 366 83.550781 L 351 83.550781 Z M 351 95.476562 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(97.189772%,55.540621%,26.767737%);fill-opacity:1;" d="M 351 83.550781 L 366 83.550781 L 366 71.625 L 351 71.625 Z M 351 83.550781 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(98.605371%,63.330919%,23.908807%);fill-opacity:1;" d="M 351 71.625 L 366 71.625 L 366 59.699219 L 351 59.699219 Z M 351 71.625 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(98.470026%,71.722454%,24.041618%);fill-opacity:1;" d="M 351 59.699219 L 366 59.699219 L 366 47.773438 L 351 47.773438 Z M 351 59.699219 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(97.130179%,80.375719%,26.641846%);fill-opacity:1;" d="M 351 47.773438 L 366 47.773438 L 366 35.847656 L 351 35.847656 Z M 351 47.773438 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(94.672185%,89.194322%,30.764705%);fill-opacity:1;" d="M 351 35.851562 L 366 35.851562 L 366 23.925781 L 351 23.925781 Z M 351 35.851562 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(90.904182%,98.215741%,35.550782%);fill-opacity:1;" d="M 351 23.925781 L 366 23.925781 L 366 12 L 351 12 Z M 351 23.925781 "/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 488 334 L 488 16 L 468 16 L 468 334 L 488 334 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph11-1-B7n/WbgL" x="400.535156" y="134.265625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph4-2-B7n/WbgL" x="369" y="254.65625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-4-B7n/WbgL" x="373.054688" y="254.65625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph5-2-B7n/WbgL" x="380.691406" y="254.65625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph4-2-B7n/WbgL" x="369" y="195.03125"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph3-3-B7n/WbgL" x="373.054688" y="195.03125"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph4-3-B7n/WbgL" x="369" y="135.40625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph12-1-B7n/WbgL" x="369" y="75.78125"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph13-1-B7n/WbgL" x="369" y="16.15625"/>
+</g>
+<g style="fill:rgb(0%,0%,0%);fill-opacity:1;">
+  <use xlink:href="#glyph14-1-B7n/WbgL" x="376.632812" y="16.15625"/>
+</g>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 140.453125 334.5 L 140.453125 340.5 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 285 334.5 L 285 340.5 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 429.546875 334.5 L 429.546875 340.5 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 125.5 319.546875 L 119.5 319.546875 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 125.5 175 L 119.5 175 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 125.5 30.453125 L 119.5 30.453125 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 468.5 334 L 488.5 334 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 468.5 254.5 L 488.5 254.5 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 468.5 175 L 488.5 175 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 468.5 95.5 L 488.5 95.5 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 468.5 16 L 488.5 16 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 125.5 334 L 444.5 334 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 126 334.5 L 126 15.5 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 125.5 16 L 444.5 16 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:2;" d="M 444 334.5 L 444 15.5 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+</g>
+</svg></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+</div>
+<p>This example was autogenerated using:</p>
+<div class="highlight"><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="n">Pkg</span><span class="w"></span>
+<span class="n">Pkg</span><span class="o">.</span><span class="n">status</span><span class="p">([</span><span class="s">&quot;CairoMakie&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ColorSchemes&quot;</span><span class="p">])</span><span class="w"></span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Status `~/work/BeautifulMakie/BeautifulMakie/docs/Project.toml`
+  [13f3f980] CairoMakie v0.8.13
+  [35d6a980] ColorSchemes v3.19.0
+</code></pre></div>
+<hr />
+<p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p>
+
+
+
+
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../line_colored/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Colored lines" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Colored lines
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../line_inset/" class="md-footer__link md-footer__link--next" aria-label="Next: Inset" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Inset
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate", "header.autohide"], "search": "../../../../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.2ab50757.min.js"></script>
+      
+        <script src="../../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
